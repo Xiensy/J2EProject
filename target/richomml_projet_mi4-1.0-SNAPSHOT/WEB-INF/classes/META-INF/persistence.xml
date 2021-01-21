@@ -14,6 +14,7 @@
         <class>com.mi4.richomml_projet_mi4.model.Etudiant</class>
         <class>com.mi4.richomml_projet_mi4.model.Groupe</class>
         <class>com.mi4.richomml_projet_mi4.model.Module</class>
+        <class>com.mi4.richomml_projet_mi4.model.Note</class>
 
         <!-- Propriétés de l'unité de persistence -->
         <properties>

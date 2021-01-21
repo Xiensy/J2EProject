@@ -16,7 +16,6 @@
 <body>
     <h1><jsp:getProperty name="etudiant" property="prenom"/> <jsp:getProperty name="etudiant" property="nom"/></h1>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
-    <p>Identifiant : <jsp:getProperty name="etudiant" property="id"/></p>
     <p>Nombre d'absences : <%= nbAbsencesEtudiant %></p>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
 </body>

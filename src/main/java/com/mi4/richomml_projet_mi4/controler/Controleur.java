@@ -34,7 +34,7 @@ public class Controleur extends HttpServlet {
             Groupe MESSI = GroupeDAO.create("MESSI");
 
             // Creation des étudiants
-            EtudiantDAO.create("Francis", "Brunet-Manquat", MIAM);
+            Etudiant etu1 = EtudiantDAO.create("Francis", "Brunet-Manquat", MIAM);
             EtudiantDAO.create("Philippe", "Martin", MIAM);
             EtudiantDAO.create("Mario", "Cortes-Cornax", MIAM);
             EtudiantDAO.create("Françoise", "Coat", SIMO);
@@ -45,6 +45,15 @@ public class Controleur extends HttpServlet {
             // Creation des groupes
             Module MI1 = ModuleDAO.create("MI1");
             Module MI4 = ModuleDAO.create("MI4");
+
+            Note n1 = NoteDAO.create(etu1, MI1, 15);
+            Note n2 = NoteDAO.create(etu1, MI4, 12);
+
+            MI1.addNote(n1);
+            MI4.addNote(n2);
+
+            etu1.addNote(n1);
+            etu1.addNote(n2);
 
             // Liés groupe et module
             //MIAM.addModule(MI1);
@@ -58,6 +67,7 @@ public class Controleur extends HttpServlet {
             //GroupeDAO.update(MIAM);
             //GroupeDAO.update(SIMO);
 
+            EtudiantDAO.update(etu1);
             ModuleDAO.update(MI1);
             ModuleDAO.update(MI4);
 

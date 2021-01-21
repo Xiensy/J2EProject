@@ -22,6 +22,8 @@ public class Module implements Serializable {
     )
     private List<Groupe> groupes = new ArrayList<>();
 
+    @OneToMany
+    private List<Note> notes;
 
     public Integer getId() {
         return id;
@@ -46,6 +48,18 @@ public class Module implements Serializable {
     public void addGroupe(Groupe groupe) {
         groupes.add(groupe);
         //groupe.getModules().add(this);
+    }
+
+    public void addNote(Note note){
+        notes.add(note);
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
     }
 
     @Override

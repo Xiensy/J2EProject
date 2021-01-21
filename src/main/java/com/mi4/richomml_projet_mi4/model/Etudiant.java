@@ -3,6 +3,7 @@ package com.mi4.richomml_projet_mi4.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Entity implementation class for Entity: Groupe
@@ -25,6 +26,9 @@ public class Etudiant implements Serializable {
 
     @ManyToOne
     private Groupe groupe;
+
+    @OneToMany
+    private List<Note> notes;
 
     private static final long serialVersionUID = 1L;
 
@@ -72,7 +76,24 @@ public class Etudiant implements Serializable {
     }
 
     public void setNbAbsences(int nbAbsences) {
-        this.nbAbsences = nbAbsences;
+        if (nbAbsences < 0){
+            this.nbAbsences = 0;
+        } else {
+            this.nbAbsences = nbAbsences;
+        }
+
+    }
+
+    public void addNote(Note note){
+        notes.add(note);
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
     }
 
     @Override
