@@ -1,4 +1,7 @@
-package com.mi4.richomml_projet_mi4;
+package com.mi4.richomml_projet_mi4.controler;
+
+import com.mi4.richomml_projet_mi4.model.*;
+import com.mi4.richomml_projet_mi4.model.Module;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -6,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 public class Controleur extends HttpServlet {
     private String urlIndex;

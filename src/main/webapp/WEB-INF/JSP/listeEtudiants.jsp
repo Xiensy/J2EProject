@@ -1,8 +1,8 @@
-<%@ page import="com.mi4.richomml_projet_mi4.Etudiant" %>
-<%@ page import="com.mi4.richomml_projet_mi4.GestionFactory" %>
+<%@ page import="com.mi4.richomml_projet_mi4.model.Etudiant" %>
+<%@ page import="com.mi4.richomml_projet_mi4.model.GestionFactory" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<jsp:useBean id="etudiants" class="java.util.List<com.mi4.richomml_projet_mi4.Etudiant>" scope="request"/>
+<jsp:useBean id="etudiants" class="java.util.List<com.mi4.richomml_projet_mi4.model.Etudiant>" scope="request"/>
 
 <!DOCTYPE html>
 <html>

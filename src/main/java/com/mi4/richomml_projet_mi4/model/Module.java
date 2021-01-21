@@ -1,4 +1,4 @@
-package com.mi4.richomml_projet_mi4;
+package com.mi4.richomml_projet_mi4.model;
 
 import javax.persistence.*;
 import java.io.Serializable;

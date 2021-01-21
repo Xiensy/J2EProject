@@ -16,7 +16,7 @@
 
     <servlet>
         <servlet-name>controller</servlet-name>
-        <servlet-class>com.mi4.richomml_projet_mi4.Controleur</servlet-class>
+        <servlet-class>com.mi4.richomml_projet_mi4.controler.Controleur</servlet-class>
         <init-param>
             <param-name>urlIndex</param-name>
             <param-value>/WEB-INF/JSP/index.jsp</param-value>

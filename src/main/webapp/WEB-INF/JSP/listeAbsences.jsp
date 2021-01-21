@@ -1,5 +1,5 @@
-<%@ page import="com.mi4.richomml_projet_mi4.GestionFactory" %>
-<%@ page import="com.mi4.richomml_projet_mi4.Etudiant" %><%--
+<%@ page import="com.mi4.richomml_projet_mi4.model.GestionFactory" %>
+<%@ page import="com.mi4.richomml_projet_mi4.model.Etudiant" %><%--
   Created by IntelliJ IDEA.
   User: lr
   Date: 05/01/2021
@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="etudiants" class="java.util.List<com.mi4.richomml_projet_mi4.Etudiant>" scope="request"/>
+<jsp:useBean id="etudiants" class="java.util.List<com.mi4.richomml_projet_mi4.model.Etudiant>" scope="request"/>
 
 <html>
 <head>
