@@ -11,7 +11,7 @@
 </head>
 <body>
     <h1>Etudiants</h1>
-    <br/>
+    <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <ul>
         <%
             for (Etudiant etu : etudiants){
@@ -19,5 +19,6 @@
             }
         %>
     </ul>
+    <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>
 </html>

@@ -16,6 +16,7 @@
 </head>
 <body>
     <h1>Liste des absences</h1>
+    <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <table>
         <thead>
         <tr>
@@ -31,5 +32,6 @@
         %>
         </tbody>
     </table>
+<jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>
 </html>
