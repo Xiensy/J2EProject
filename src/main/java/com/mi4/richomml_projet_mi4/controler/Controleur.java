@@ -69,7 +69,7 @@ public class Controleur extends HttpServlet {
         String methode = request.getMethod().toLowerCase();
 
         String action = request.getPathInfo();
-        if (action == null){
+        if (action == null) {
             action = "/";
         }
 
@@ -79,7 +79,11 @@ public class Controleur extends HttpServlet {
             showStudentDetails(request, response);
         } else if (methode.equals("get") && action.equals("/listeAbsences")) {
             showAbsences(request, response);
-        } else {
+        } else if (methode.equals("get") && action.equals("/addAbsences")) {
+            addAbsences(request, response);
+        }else if (methode.equals("get") && action.equals("/removeAbsences")) {
+            removeAbsences(request, response);
+        }else {
             loadJSP(urlIndex, request, response);
         }
     }
@@ -110,6 +114,22 @@ public class Controleur extends HttpServlet {
         request.setAttribute("etudiants", etudiants);
 
         loadJSP(urlListeAbsences, request, response);
+    }
+
+    private void addAbsences(HttpServletRequest request, HttpServletResponse response){
+        int idEtudiant = Integer.parseInt(request.getParameter("idEtudiant"));
+
+        EtudiantDAO.addAbsences(idEtudiant, 1);
+
+        showAbsences(request, response);
+    }
+
+    private void removeAbsences(HttpServletRequest request, HttpServletResponse response){
+        int idEtudiant = Integer.parseInt(request.getParameter("idEtudiant"));
+
+        EtudiantDAO.addAbsences(idEtudiant, -1);
+
+        showAbsences(request, response);
     }
 
     private void loadJSP(String jsp, HttpServletRequest req, HttpServletResponse res){

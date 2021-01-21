@@ -13,11 +13,9 @@
     <h1>Etudiants</h1>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <ul>
-        <%
-            for (Etudiant etu : etudiants){
-                out.println("<li><a href=\"" +  application.getContextPath()  + "/do/details?idEtudiant=" + etu.getId() + "\">" + etu.getPrenom() + " " + etu.getNom() + "</a></li>");
-            }
-        %>
+        <%for (Etudiant etu : etudiants){ %>
+            <li><a href="<%= application.getContextPath()%>/do/details?idEtudiant=<%= etu.getId() %>"><%= etu.getPrenom() + " " + etu.getNom() %></a></li>
+        <% } %>
     </ul>
     <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>

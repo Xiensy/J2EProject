@@ -25,11 +25,17 @@
         </tr>
         </thead>
         <tbody>
-        <%
-            for (Etudiant etu : etudiants){
-                out.println("<tr><td><a href=\"" +  application.getContextPath()  + "/do/details?idEtudiant=" + etu.getId() + "\">" + etu.getPrenom() + " " + etu.getNom() + "</a></td><td>" + etu.getNbAbsences() + "</td></tr>");
-            }
-        %>
+        <% for (Etudiant etu : etudiants) { %>
+                <tr>
+                    <td>
+                        <a href="<%= application.getContextPath()%>/do/details?idEtudiant=<%= etu.getId() %>"><%= etu.getPrenom() + " " + etu.getNom() %></a>
+                    </td>
+                    <td>
+                        <p><a href="<%= application.getContextPath()%>/do/removeAbsences?idEtudiant=<%= etu.getId() %>">-</a> <%= etu.getNbAbsences() %> <a href="<%= application.getContextPath()%>/do/addAbsences?idEtudiant=<%= etu.getId() %>">+</a></p>
+                    </td>
+                </tr>
+        <% } %>
+
         </tbody>
     </table>
 <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
