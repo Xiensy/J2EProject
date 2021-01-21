@@ -11,9 +11,9 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
         <!-- Classes persistées - liées à tes tables de la base de données -->
-        <class>com.mi4.richomml_projet_mi4.Etudiant</class>
-        <class>com.mi4.richomml_projet_mi4.Groupe</class>
-        <class>com.mi4.richomml_projet_mi4.Module</class>
+        <class>com.mi4.richomml_projet_mi4.model.Etudiant</class>
+        <class>com.mi4.richomml_projet_mi4.model.Groupe</class>
+        <class>com.mi4.richomml_projet_mi4.model.Module</class>
 
         <!-- Propriétés de l'unité de persistence -->
         <properties>

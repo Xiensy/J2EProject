@@ -1,5 +1,5 @@
-<%@ page import="com.mi4.richomml_projet_mi4.GestionFactory" %>
-<%@ page import="com.mi4.richomml_projet_mi4.Etudiant" %><%--
+<%@ page import="com.mi4.richomml_projet_mi4.model.GestionFactory" %>
+<%@ page import="com.mi4.richomml_projet_mi4.model.Etudiant" %><%--
   Created by IntelliJ IDEA.
   User: lr
   Date: 09/12/2020
@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="etudiant" class="com.mi4.richomml_projet_mi4.Etudiant" scope="request"/>
+<jsp:useBean id="etudiant" class="com.mi4.richomml_projet_mi4.model.Etudiant" scope="request"/>
 <jsp:useBean id="nbAbsencesEtudiant" class="java.lang.Integer" scope="request"/>
 <html>
 <head>

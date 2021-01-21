@@ -6,6 +6,7 @@
 </head>
 <body>
     <h1>Accueil</h1>
+    <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <ul>
         <li>
             <a href="<%= application.getContextPath() + "/do/listeEtudiants" %>">Liste des étudiants</a>
@@ -14,5 +15,6 @@
             <a href="<%= application.getContextPath() + "/do/listeAbsences" %>">Liste des absences</a>
         </li>
     </ul>
+    <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>
 </html>
