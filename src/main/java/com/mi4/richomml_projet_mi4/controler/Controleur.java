@@ -147,10 +147,8 @@ public class Controleur extends HttpServlet {
 
         int idGroupe =Integer.parseInt(request.getParameter("idGroupe"));
         Groupe groupe = GroupeDAO.getGroupeById(idGroupe);
-        List<Etudiant> etudiants = groupe.getEtudiants();
 
         request.setAttribute("groupe", groupe);
-        request.setAttribute("etudiants", etudiants);
 
         loadJSP(urlListeAbsences, request, response);
     }
