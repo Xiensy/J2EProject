@@ -1,5 +1,6 @@
 <%@ page import="com.mi4.richomml_projet_mi4.model.GestionFactory" %>
-<%@ page import="com.mi4.richomml_projet_mi4.model.Etudiant" %><%--
+<%@ page import="com.mi4.richomml_projet_mi4.model.Etudiant" %>
+<%@ page import="com.mi4.richomml_projet_mi4.model.Groupe" %><%--
   Created by IntelliJ IDEA.
   User: lr
   Date: 05/01/2021
@@ -8,30 +9,30 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="etudiants" class="java.util.List<com.mi4.richomml_projet_mi4.model.Etudiant>" scope="request"/>
+<jsp:useBean id="groupes" class="java.util.List<com.mi4.richomml_projet_mi4.model.Groupe>" scope="request"/>
 
 <html>
 <head>
-    <title>Liste des Absences</title>
+    <title>Liste des groupes</title>
 </head>
 <body>
-    <h1>Liste des absences</h1>
+    <h1>Liste des groupes</h1>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <table>
         <thead>
         <tr>
-            <td>Nom</td>
-            <td>Nb Absences</td>
+            <td>Groupe</td>
+            <td>Nombres d'absences</td>
         </tr>
         </thead>
         <tbody>
-        <% for (Etudiant etu : etudiants) { %>
+        <% for (Groupe groupe : groupes) { %>
                 <tr>
                     <td>
-                        <a href="<%= application.getContextPath()%>/do/details?idEtudiant=<%= etu.getId() %>"><%= etu.getPrenom() + " " + etu.getNom() %></a>
+                        <a href="<%= application.getContextPath()%>/do/listeAbsences?idGroupe=<%= groupe.getId() %>"><%= groupe.getNom() %></a>
                     </td>
                     <td>
-                        <p><a href="<%= application.getContextPath()%>/do/removeAbsences?idEtudiant=<%= etu.getId() %>">-</a> <%= etu.getNbAbsences() %> <a href="<%= application.getContextPath()%>/do/addAbsences?idEtudiant=<%= etu.getId() %>">+</a></p>
+                        <%= groupe.getNbAbsences() %>
                     </td>
                 </tr>
         <% } %>

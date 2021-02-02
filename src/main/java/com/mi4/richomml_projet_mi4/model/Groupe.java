@@ -50,7 +50,13 @@ public class Groupe implements Serializable {
         return this.etudiants;
     }
 
-
+    public int getNbAbsences() {
+        int nbAbcences = 0;
+        for (Etudiant etu : this.etudiants) {
+            nbAbcences += etu.getNbAbsences();
+        }
+        return nbAbcences;
+    }
 	/*public List<Module> getModules() {
 		return modules;
 	}
