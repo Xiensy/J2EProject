@@ -15,11 +15,14 @@ public class Controleur extends HttpServlet {
     private String urlListeEtudiants;
     private String urlDetails;
     private String urlListeAbsences;
+    private String urlGroupeAbsences;
 
     public void init() {
         urlIndex = getInitParameter("urlIndex");
         urlListeEtudiants = getInitParameter("urlListeEtudiants");
         urlListeAbsences = getInitParameter("urlListeAbsences");
+        urlGroupeAbsences = getInitParameter("urlGroupeAbsences");
+
         urlDetails = getInitParameter("urlDetails");
 
         GestionFactory.open();
@@ -87,13 +90,15 @@ public class Controleur extends HttpServlet {
             showEtudiants(request, response);
         } else if (methode.equals("get") && action.equals("/details")) {
             showStudentDetails(request, response);
-        } else if (methode.equals("get") && action.equals("/listeAbsences")) {
+        }  else if (methode.equals("get") && action.equals("/groupeAbsences")) {
+            showGroupeAbsences(request, response);
+        }else if (methode.equals("get") && action.equals("/listeAbsences")) {
             showAbsences(request, response);
         } else if (methode.equals("get") && action.equals("/addAbsences")) {
             addAbsences(request, response);
-        }else if (methode.equals("get") && action.equals("/removeAbsences")) {
+        } else if (methode.equals("get") && action.equals("/removeAbsences")) {
             removeAbsences(request, response);
-        }else {
+        } else {
             loadJSP(urlIndex, request, response);
         }
     }
@@ -118,9 +123,22 @@ public class Controleur extends HttpServlet {
         loadJSP(urlDetails, request, response);
     }
 
-    private void showAbsences(HttpServletRequest request, HttpServletResponse response){
-        List<Etudiant> etudiants = EtudiantDAO.getAll();
+    private void showGroupeAbsences(HttpServletRequest request, HttpServletResponse response) {
+        List<Groupe> groupes = GroupeDAO.getAll();
 
+        request.setAttribute("groupes", groupes);
+
+        loadJSP(urlGroupeAbsences, request, response);
+
+    }
+
+    private void showAbsences(HttpServletRequest request, HttpServletResponse response){
+
+        int idGroupe =Integer.parseInt(request.getParameter("idGroupe"));
+        Groupe groupe = GroupeDAO.getGroupeById(idGroupe);
+        List<Etudiant> etudiants = groupe.getEtudiants();
+
+        request.setAttribute("groupe", groupe);
         request.setAttribute("etudiants", etudiants);
 
         loadJSP(urlListeAbsences, request, response);
