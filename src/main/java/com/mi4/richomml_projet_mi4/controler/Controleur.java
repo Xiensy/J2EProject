@@ -16,13 +16,14 @@ public class Controleur extends HttpServlet {
     private String urlDetails;
     private String urlListeAbsences;
     private String urlGroupeAbsences;
+    private String urlNotesEtudiant;
 
     public void init() {
         urlIndex = getInitParameter("urlIndex");
         urlListeEtudiants = getInitParameter("urlListeEtudiants");
         urlListeAbsences = getInitParameter("urlListeAbsences");
         urlGroupeAbsences = getInitParameter("urlGroupeAbsences");
-
+        urlNotesEtudiant = getInitParameter("urlNotesEtudiant");
         urlDetails = getInitParameter("urlDetails");
 
         GestionFactory.open();
@@ -121,6 +122,16 @@ public class Controleur extends HttpServlet {
         request.setAttribute("nbAbsencesEtudiant", nbAbsencesEtudiant);
 
         loadJSP(urlDetails, request, response);
+    }
+
+    private void showEtudiantNotes(HttpServletRequest request, HttpServletResponse response){
+        int idEtudiant = Integer.parseInt(request.getParameter("idEtudiant"));
+
+        Etudiant etudiant = EtudiantDAO.getEtudiantById(idEtudiant);
+
+        request.setAttribute("etudiant", etudiant);
+
+        loadJSP(urlNotesEtudiant, request, response);
     }
 
     private void showGroupeAbsences(HttpServletRequest request, HttpServletResponse response) {
