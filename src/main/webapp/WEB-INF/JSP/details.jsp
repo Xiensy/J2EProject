@@ -1,5 +1,6 @@
 <%@ page import="com.mi4.richomml_projet_mi4.model.GestionFactory" %>
-<%@ page import="com.mi4.richomml_projet_mi4.model.Etudiant" %><%--
+<%@ page import="com.mi4.richomml_projet_mi4.model.Etudiant" %>
+<%@ page import="com.mi4.richomml_projet_mi4.model.Note" %><%--
   Created by IntelliJ IDEA.
   User: lr
   Date: 09/12/2020
@@ -14,9 +15,13 @@
     <title><%= etudiant.getPrenom() + " " + etudiant.getNom() %></title>
 </head>
 <body>
+    <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <h1><jsp:getProperty name="etudiant" property="prenom"/> <jsp:getProperty name="etudiant" property="nom"/></h1>
-    <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <p>Nombre d'absences : <%= nbAbsencesEtudiant %></p>
-    <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
+    <p>Notes : </p>
+    <% for (Note note : etudiant.getNotes()) { %>
+        <span><%= note.getModule().getNom() %> </span><span> <%= note.getValeur() %></span></br>
+    <% } %>
+    <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>
 </html>
