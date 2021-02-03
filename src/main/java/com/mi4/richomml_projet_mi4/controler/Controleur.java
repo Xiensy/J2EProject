@@ -17,6 +17,7 @@ public class Controleur extends HttpServlet {
     private String urlListeAbsences;
     private String urlGroupeAbsences;
     private String urlNotesEtudiant;
+    private String urlListeGroupes;
 
     public void init() {
         urlIndex = getInitParameter("urlIndex");
@@ -25,6 +26,7 @@ public class Controleur extends HttpServlet {
         urlGroupeAbsences = getInitParameter("urlGroupeAbsences");
         urlNotesEtudiant = getInitParameter("urlNotesEtudiant");
         urlDetails = getInitParameter("urlDetails");
+        urlListeGroupes = getInitParameter("urlListeGroupes");
 
         GestionFactory.open();
 
@@ -99,6 +101,10 @@ public class Controleur extends HttpServlet {
             addAbsences(request, response);
         } else if (methode.equals("get") && action.equals("/removeAbsences")) {
             removeAbsences(request, response);
+        } else if (methode.equals("get") && action.equals("/listeNotesEtudiant")) {
+            showEtudiantNotes(request, response);
+        } else if (methode.equals("get") && action.equals("/listeGroupes")) {
+            showListeGroupes(request, response);
         } else {
             loadJSP(urlIndex, request, response);
         }
@@ -110,6 +116,14 @@ public class Controleur extends HttpServlet {
         request.setAttribute("etudiants", etudiants);
 
         loadJSP(urlListeEtudiants, request, response);
+    }
+
+    private void showListeGroupes(HttpServletRequest request, HttpServletResponse response){
+        List<Groupe> groupes = GroupeDAO.getAll();
+
+        request.setAttribute("groupes", groupes);
+
+        loadJSP(urlListeGroupes, request, response);
     }
 
     private void showStudentDetails(HttpServletRequest request, HttpServletResponse response){
@@ -125,11 +139,11 @@ public class Controleur extends HttpServlet {
     }
 
     private void showEtudiantNotes(HttpServletRequest request, HttpServletResponse response){
-        int idEtudiant = Integer.parseInt(request.getParameter("idEtudiant"));
+        int idGroupe = Integer.parseInt(request.getParameter("idGroupe"));
 
-        Etudiant etudiant = EtudiantDAO.getEtudiantById(idEtudiant);
+        Groupe groupe = GroupeDAO.getGroupeById(idGroupe);
 
-        request.setAttribute("etudiant", etudiant);
+        request.setAttribute("groupe", groupe);
 
         loadJSP(urlNotesEtudiant, request, response);
     }
