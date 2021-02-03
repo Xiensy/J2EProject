@@ -6,8 +6,8 @@
     <jsp:include page="<%= application.getInitParameter("styleIncluder")%>"/>
 </head>
 <body>
-    <h1>Accueil</h1>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
+    <h1>Accueil</h1>
     <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>
 </html>

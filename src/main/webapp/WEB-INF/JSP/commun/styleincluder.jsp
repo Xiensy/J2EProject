@@ -1,1 +1,1 @@
-<link rel="stylesheet" type="text/css" href="<%= application.getInitParameter("style") %>">
+<link rel="stylesheet" type="text/css" href="<%= application.getContextPath() + "/CSS/style.css" %>">
