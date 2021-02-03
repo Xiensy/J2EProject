@@ -17,6 +17,14 @@
         <param-name>pieddepage</param-name>
         <param-value>/WEB-INF/JSP/commun/pieddepage.jsp</param-value>
     </context-param>
+    <context-param>
+        <param-name>style</param-name>
+        <param-value>./CSS/style.css</param-value>
+    </context-param>
+    <context-param>
+        <param-name>styleIncluder</param-name>
+        <param-value>/WEB-INF/JSP/commun/styleincluder.jsp</param-value>
+    </context-param>
 
     <servlet>
         <servlet-name>controller</servlet-name>

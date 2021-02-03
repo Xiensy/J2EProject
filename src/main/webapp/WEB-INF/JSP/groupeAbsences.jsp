@@ -14,6 +14,7 @@
 <html>
 <head>
     <title>Liste des groupes</title>
+    <jsp:include page="<%= application.getInitParameter("styleIncluder")%>"/>
 </head>
 <body>
     <h1>Liste des groupes</h1>

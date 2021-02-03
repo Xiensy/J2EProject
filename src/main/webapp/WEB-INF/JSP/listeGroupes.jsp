@@ -9,6 +9,7 @@
 <html>
 <head>
     <title><%= application.getInitParameter("title") %></title>
+    <jsp:include page="<%= application.getInitParameter("styleIncluder")%>"/>
 </head>
 <body>
 <h1>Groupes</h1>

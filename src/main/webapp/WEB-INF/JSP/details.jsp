@@ -9,6 +9,7 @@
 <html>
 <head>
     <title><%= etudiant.getPrenom() + " " + etudiant.getNom() %></title>
+    <jsp:include page="<%= application.getInitParameter("styleIncluder")%>"/>
 </head>
 <body>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>

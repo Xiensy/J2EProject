@@ -8,6 +8,7 @@
 <html>
 <head>
     <title><%= application.getInitParameter("title") %></title>
+    <jsp:include page="<%= application.getInitParameter("styleIncluder")%>"/>
 </head>
 <body>
 <h1>Notes de <%= groupe.getNom() %></h1>
