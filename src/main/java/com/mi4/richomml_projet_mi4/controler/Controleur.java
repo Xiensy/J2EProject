@@ -19,6 +19,7 @@ public class Controleur extends HttpServlet {
     private String urlNotesEtudiant;
     private String urlListeGroupes;
     private String urlListeModuleNote;
+    private String urlEditNotesEtudiant;
 
     public void init() {
         urlIndex = getInitParameter("urlIndex");
@@ -29,7 +30,7 @@ public class Controleur extends HttpServlet {
         urlDetails = getInitParameter("urlDetails");
         urlListeGroupes = getInitParameter("urlListeGroupes");
         urlListeModuleNote = getInitParameter("urlListeModuleNote");
-
+        urlEditNotesEtudiant = getInitParameter("urlEditNotesEtudiant");
         GestionFactory.open();
 
         ///// INITIALISATION DE LA BD
@@ -109,6 +110,8 @@ public class Controleur extends HttpServlet {
             showListeGroupes(request, response);
         } else if (methode.equals("get") && action.equals("/listeModuleNote")) {
             showListeModuleNote(request, response);
+        } else if (methode.equals("get") && action.equals("/editNotesEtudiant")) {
+            submitEtudiantNotes(request, response);
         } else {
             loadJSP(urlIndex, request, response);
         }
@@ -156,8 +159,21 @@ public class Controleur extends HttpServlet {
         Module module = ModuleDAO.getModuleById(idModule);
 
         request.setAttribute("module", module);
+        if (request.getParameter("edit") == "true") {
+            loadJSP(urlEditNotesEtudiant, request, response);
+        } else {
+            loadJSP(urlNotesEtudiant, request, response);
+        }
+    }
 
-        loadJSP(urlNotesEtudiant, request, response);
+    private void submitEtudiantNotes(HttpServletRequest request, HttpServletResponse response){
+        int idModule = Integer.parseInt(request.getParameter("idModule"));
+
+        Module module = ModuleDAO.getModuleById(idModule);
+
+        request.setAttribute("module", module);
+
+        loadJSP(urlEditNotesEtudiant, request, response);
     }
 
     private void showGroupeAbsences(HttpServletRequest request, HttpServletResponse response) {
