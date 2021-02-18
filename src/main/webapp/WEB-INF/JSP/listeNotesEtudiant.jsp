@@ -2,7 +2,7 @@
 <%@ page import="com.mi4.richomml_projet_mi4.model.Etudiant" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<jsp:useBean id="groupe" class="com.mi4.richomml_projet_mi4.model.Groupe" scope="request"/>
+<jsp:useBean id="module" class="com.mi4.richomml_projet_mi4.model.Module" scope="request"/>
 
 <!DOCTYPE html>
 <html>
@@ -11,16 +11,24 @@
     <jsp:include page="<%= application.getInitParameter("styleIncluder")%>"/>
 </head>
 <body>
-<h1>Notes de <%= groupe.getNom() %></h1>
 <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
-    <%for (Etudiant etu : groupe.getEtudiants()){ %>
-        <h2><%= etu.getNom() %></h2>
-        <ul>
-        <%for (Note note : etu.getNotes()) {%>
-            <li><p><%= note.getModule().getNom() %></p><p><%= note.getValeur() %></p></li>
+<h1>Notes du module : <%= module.getNom() %></h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nom étudiant</th>
+            <th>Note</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%for (Note note : module.getNotes()){ %>
+            <tr>
+                <td><a href="<%= application.getContextPath()%>/do/details?idEtudiant=<%= note.getEtudiant().getId() %>"><%= note.getEtudiant().getPrenom() + " " + note.getEtudiant().getNom() %></a></td>
+                <td><%= note.getValeur() %></td>
+            </tr>
         <% } %>
-        </ul>
-    <% } %>
+    </tbody>
+</table>
 <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>
 </html>

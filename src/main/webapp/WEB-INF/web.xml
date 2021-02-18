@@ -47,15 +47,15 @@
         </init-param>
         <init-param>
             <param-name>urlGroupeAbsences</param-name>
-            <param-value>/WEB-INF/JSP/groupeAbsences.jsp</param-value>
+            <param-value>/WEB-INF/JSP/listeGroupeAbsences.jsp</param-value>
         </init-param>
         <init-param>
             <param-name>urlNotesEtudiant</param-name>
             <param-value>/WEB-INF/JSP/listeNotesEtudiant.jsp</param-value>
         </init-param>
         <init-param>
-            <param-name>urlListeGroupes</param-name>
-            <param-value>/WEB-INF/JSP/listeGroupes.jsp</param-value>
+            <param-name>urlListeModuleNote</param-name>
+            <param-value>/WEB-INF/JSP/listeModuleNote.jsp</param-value>
         </init-param>
     </servlet>
     

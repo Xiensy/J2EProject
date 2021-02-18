@@ -18,6 +18,7 @@ public class Controleur extends HttpServlet {
     private String urlGroupeAbsences;
     private String urlNotesEtudiant;
     private String urlListeGroupes;
+    private String urlListeModuleNote;
 
     public void init() {
         urlIndex = getInitParameter("urlIndex");
@@ -27,6 +28,7 @@ public class Controleur extends HttpServlet {
         urlNotesEtudiant = getInitParameter("urlNotesEtudiant");
         urlDetails = getInitParameter("urlDetails");
         urlListeGroupes = getInitParameter("urlListeGroupes");
+        urlListeModuleNote = getInitParameter("urlListeModuleNote");
 
         GestionFactory.open();
 
@@ -105,6 +107,8 @@ public class Controleur extends HttpServlet {
             showEtudiantNotes(request, response);
         } else if (methode.equals("get") && action.equals("/listeGroupes")) {
             showListeGroupes(request, response);
+        } else if (methode.equals("get") && action.equals("/listeModuleNote")) {
+            showListeModuleNote(request, response);
         } else {
             loadJSP(urlIndex, request, response);
         }
@@ -126,6 +130,14 @@ public class Controleur extends HttpServlet {
         loadJSP(urlListeGroupes, request, response);
     }
 
+    private void showListeModuleNote(HttpServletRequest request, HttpServletResponse response){
+        List<Module> modules = ModuleDAO.getAll();
+
+        request.setAttribute("modules", modules);
+
+        loadJSP(urlListeModuleNote, request, response);
+    }
+
     private void showStudentDetails(HttpServletRequest request, HttpServletResponse response){
         int idEtudiant = Integer.parseInt(request.getParameter("idEtudiant"));
 
@@ -139,11 +151,11 @@ public class Controleur extends HttpServlet {
     }
 
     private void showEtudiantNotes(HttpServletRequest request, HttpServletResponse response){
-        int idGroupe = Integer.parseInt(request.getParameter("idGroupe"));
+        int idModule = Integer.parseInt(request.getParameter("idModule"));
 
-        Groupe groupe = GroupeDAO.getGroupeById(idGroupe);
+        Module module = ModuleDAO.getModuleById(idModule);
 
-        request.setAttribute("groupe", groupe);
+        request.setAttribute("module", module);
 
         loadJSP(urlNotesEtudiant, request, response);
     }

@@ -11,8 +11,8 @@
     <jsp:include page="<%= application.getInitParameter("styleIncluder")%>"/>
 </head>
 <body>
-    <h1>Etudiants</h1>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
+    <h1>Etudiants</h1>
     <ul>
         <%for (Etudiant etu : etudiants){ %>
             <li><a href="<%= application.getContextPath()%>/do/details?idEtudiant=<%= etu.getId() %>"><%= etu.getPrenom() + " " + etu.getNom() %></a></li>

@@ -96,6 +96,7 @@ public class Etudiant implements Serializable {
         this.notes = notes;
     }
 
+
     @Override
     public String toString() {
         return "[" + this.getId() + "] " + this.getPrenom() + " " + this.getNom();

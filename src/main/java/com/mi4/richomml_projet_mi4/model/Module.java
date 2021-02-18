@@ -58,8 +58,24 @@ public class Module implements Serializable {
         return notes;
     }
 
+    public float getMoyenneNotes() {
+        float moyenne = 0;
+        for (Note note : this.notes) {
+            moyenne += note.getValeur();
+        }
+        return moyenne / this.notes.size();
+    }
+
     public void setNotes(List<Note> notes) {
         this.notes = notes;
+    }
+
+    public List<Etudiant> getAllEtudiant() {
+        ArrayList<Etudiant> etudiants = new ArrayList<>();
+        for (Note note : this.notes) {
+            etudiants.add(note.getEtudiant());
+        }
+        return etudiants;
     }
 
     @Override
