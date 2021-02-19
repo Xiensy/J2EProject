@@ -110,11 +110,16 @@ public class Controleur extends HttpServlet {
             showListeGroupes(request, response);
         } else if (methode.equals("get") && action.equals("/listeModuleNote")) {
             showListeModuleNote(request, response);
-        } else if (methode.equals("get") && action.equals("/editNotesEtudiant")) {
+        } else if (action.equals("/submitNoteEtudiant")) {
             submitEtudiantNotes(request, response);
         } else {
             loadJSP(urlIndex, request, response);
         }
+
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException  {
+        doGet(request, response);
     }
 
     private void showEtudiants(HttpServletRequest request, HttpServletResponse response){
@@ -159,7 +164,7 @@ public class Controleur extends HttpServlet {
         Module module = ModuleDAO.getModuleById(idModule);
 
         request.setAttribute("module", module);
-        if (request.getParameter("edit") == "true") {
+        if ("true".equals(request.getParameter("edit"))) {
             loadJSP(urlEditNotesEtudiant, request, response);
         } else {
             loadJSP(urlNotesEtudiant, request, response);
@@ -167,13 +172,27 @@ public class Controleur extends HttpServlet {
     }
 
     private void submitEtudiantNotes(HttpServletRequest request, HttpServletResponse response){
+
+        System.out.println();
+        String[] idNotes = request.getParameterValues("notes");
+        String[] notesValues = request.getParameterValues("noteValeurs");
+
+        for (int i = 0; i < idNotes.length; i++) {
+            Note note = NoteDAO.getNoteById(Integer.parseInt(idNotes[i]));
+            int noteValeur = Integer.parseInt(notesValues[i]);
+            if (noteValeur != note.getValeur()) {
+                note.setValeur(noteValeur);
+                NoteDAO.update(note);
+            }
+        }
+
         int idModule = Integer.parseInt(request.getParameter("idModule"));
 
         Module module = ModuleDAO.getModuleById(idModule);
 
         request.setAttribute("module", module);
 
-        loadJSP(urlEditNotesEtudiant, request, response);
+        loadJSP(urlNotesEtudiant, request, response);
     }
 
     private void showGroupeAbsences(HttpServletRequest request, HttpServletResponse response) {

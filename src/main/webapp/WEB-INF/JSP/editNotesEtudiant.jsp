@@ -13,23 +13,31 @@
 <body>
 <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
 <h1>Notes du module : <%= module.getNom() %></h1>
-<div><a href="<%= application.getContextPath()%>?idModule=<%= module.getId() %>&edit=true">Modifier les notes</a><a href="#">Ajouter un étudiant</a></div>
-<table>
-    <thead>
-        <tr>
-            <th>Nom étudiant</th>
-            <th>Note</th>
-        </tr>
-    </thead>
-    <tbody>
-        <%for (Note note : module.getNotes()){ %>
+<form method="post" action="<%= application.getContextPath()%>/do/submitNoteEtudiant">
+    <table>
+        <thead>
             <tr>
-                <td><a href="<%= application.getContextPath()%>/do/details?idEtudiant=<%= note.getEtudiant().getId() %>"><%= note.getEtudiant().getPrenom() + " " + note.getEtudiant().getNom() %></a></td>
-                <td><%= note.getValeur() %></td>
+                <th>Nom étudiant</th>
+                <th>Note</th>
             </tr>
-        <% } %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <%for (Note note : module.getNotes()){ %>
+                <tr>
+                    <input type="hidden" name="notes" value="<%= note.getId() %>">
+                    <td><%= note.getEtudiant().getPrenom() + " " + note.getEtudiant().getNom() %></td>
+                    <td><input type="number" name="noteValeurs" value="<%= note.getValeur() %>"></td>
+                </tr>
+            <% } %>
+        </tbody>
+        <tfoot>
+        <tr>
+            <input type="hidden" name="idModule" value="<%= module.getId() %>"/>
+            <td><input type="submit" name="edit" value="Enregistrer"></td>
+        </tr>
+        </tfoot>
+    </table>
+</form>
 <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>
 </html>

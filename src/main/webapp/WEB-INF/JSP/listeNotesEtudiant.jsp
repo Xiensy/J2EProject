@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
 <h1>Notes du module : <%= module.getNom() %></h1>
-<div><a href="<%= application.getContextPath()%>?idModule=<%= module.getId() %>&edit=true">Modifier les notes</a><a href="#">Ajouter un étudiant</a></div>
+<div><a href="<%= application.getContextPath()%>/do/listeNotesEtudiant?idModule=<%= module.getId() %>&edit=true">Modifier les notes</a><a href="#">Ajouter un étudiant</a></div>
 <table>
     <thead>
         <tr>
