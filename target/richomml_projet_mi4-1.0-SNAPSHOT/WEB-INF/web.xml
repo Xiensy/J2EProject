@@ -57,6 +57,14 @@
             <param-name>urlListeModuleNote</param-name>
             <param-value>/WEB-INF/JSP/listeModuleNote.jsp</param-value>
         </init-param>
+        <init-param>
+            <param-name>urlSubmitEtudiantNotes</param-name>
+            <param-value>/WEB-INF/JSP/submitEtudiantNotes.jsp</param-value>
+        </init-param>
+        <init-param>
+            <param-name>urlEditNotesEtudiant</param-name>
+            <param-value>/WEB-INF/JSP/editNotesEtudiant.jsp</param-value>
+        </init-param>
     </servlet>
     
     <servlet-mapping>

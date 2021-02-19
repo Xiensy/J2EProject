@@ -14,6 +14,8 @@
 <body>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <h1><jsp:getProperty name="etudiant" property="prenom"/> <jsp:getProperty name="etudiant" property="nom"/></h1>
+    <a href="<%= application.getContextPath()%>/do/editerEtudiant?idEtudiant=<%= etudiant.getId() %>">Editer</a>
+    <p>Groupe : <%= etudiant.getGroupe().getNom() %></p>
     <p>Nombre d'absences : <%= nbAbsencesEtudiant %></p>
     <p>Notes : </p>
     <% for (Note note : etudiant.getNotes()) { %>
