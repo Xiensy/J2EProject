@@ -67,4 +67,22 @@ public class NoteDAO {
 
     }
 
+
+    public static Note getNoteById(int id) {
+
+        // Creation de l'entity manager
+        EntityManager em = GestionFactory.factory.createEntityManager();
+
+        //
+        Note note = em.find(Note.class, id);
+        // etu est maintenant un objet de la classe Etudiant
+        // ou NULL si l'étudiant n'existe pas
+
+
+        // Close the entity manager
+        em.close();
+
+        return note;
+    }
+
 }
