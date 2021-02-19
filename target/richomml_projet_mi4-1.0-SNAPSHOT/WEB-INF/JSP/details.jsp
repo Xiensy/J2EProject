@@ -4,7 +4,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="etudiant" class="com.mi4.richomml_projet_mi4.model.Etudiant" scope="request"/>
-<jsp:useBean id="nbAbsencesEtudiant" class="java.lang.Integer" scope="request"/>
 
 <html>
 <head>
@@ -16,7 +15,7 @@
     <h1><jsp:getProperty name="etudiant" property="prenom"/> <jsp:getProperty name="etudiant" property="nom"/></h1>
     <a href="<%= application.getContextPath()%>/do/editerEtudiant?idEtudiant=<%= etudiant.getId() %>">Editer</a>
     <p>Groupe : <%= etudiant.getGroupe().getNom() %></p>
-    <p>Nombre d'absences : <%= nbAbsencesEtudiant %></p>
+    <p>Nombre d'absences : <%= etudiant.getNbAbsences() %></p>
     <p>Notes : </p>
     <% for (Note note : etudiant.getNotes()) { %>
         <span><%= note.getModule().getNom() %> </span><span> <%= note.getValeur() %></span></br>

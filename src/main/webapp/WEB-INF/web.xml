@@ -65,6 +65,10 @@
             <param-name>urlEditNotesEtudiant</param-name>
             <param-value>/WEB-INF/JSP/editNotesEtudiant.jsp</param-value>
         </init-param>
+        <init-param>
+            <param-name>urlEditEtudiant</param-name>
+            <param-value>/WEB-INF/JSP/editEtudiant.jsp</param-value>
+        </init-param>
     </servlet>
     
     <servlet-mapping>

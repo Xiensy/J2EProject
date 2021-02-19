@@ -20,6 +20,7 @@ public class Controleur extends HttpServlet {
     private String urlListeGroupes;
     private String urlListeModuleNote;
     private String urlEditNotesEtudiant;
+    private String urlEditEtudiant;
 
     public void init() {
         urlIndex = getInitParameter("urlIndex");
@@ -31,6 +32,7 @@ public class Controleur extends HttpServlet {
         urlListeGroupes = getInitParameter("urlListeGroupes");
         urlListeModuleNote = getInitParameter("urlListeModuleNote");
         urlEditNotesEtudiant = getInitParameter("urlEditNotesEtudiant");
+        urlEditEtudiant = getInitParameter("urlEditEtudiant");
         GestionFactory.open();
 
         ///// INITIALISATION DE LA BD
@@ -112,6 +114,10 @@ public class Controleur extends HttpServlet {
             showListeModuleNote(request, response);
         } else if (action.equals("/submitNoteEtudiant")) {
             submitEtudiantNotes(request, response);
+        } else if (action.equals("/editerEtudiant")){
+            showEditerEtudiant(request, response);
+        } else if (action.equals("/submitEditerEtudiant")){
+            submitEditerEtudiant(request, response);
         } else {
             loadJSP(urlIndex, request, response);
         }
@@ -169,6 +175,53 @@ public class Controleur extends HttpServlet {
         } else {
             loadJSP(urlNotesEtudiant, request, response);
         }
+    }
+
+    private void submitEditerEtudiant(HttpServletRequest request, HttpServletResponse response){
+        String idEtudiant = request.getParameter("idEtudiant");
+        String nbAbsences = request.getParameter("nbAbsences");
+
+        Etudiant etudiant = EtudiantDAO.getEtudiantById(Integer.parseInt(idEtudiant));
+
+        String prenom = request.getParameter("prenomEtudiant");
+        String nom = request.getParameter("nomEtudiant");
+        Groupe groupe = GroupeDAO.getGroupeById(Integer.parseInt(request.getParameter("groupeEtudiant")));
+        String[] valeurNotes = request.getParameterValues("notes");
+
+        int i = 0;
+        for (Note note : etudiant.getNotes()){
+            note.setValeur(Integer.parseInt(valeurNotes[i]));
+            NoteDAO.update(note);
+            i++;
+        }
+
+        if (!"".equals(prenom)){
+            etudiant.setPrenom(prenom);
+        }
+
+        if (!"".equals(nom)){
+            etudiant.setNom(nom);
+        }
+
+        etudiant.setGroupe(groupe);
+        etudiant.setNbAbsences(Integer.parseInt(nbAbsences));
+
+        EtudiantDAO.update(etudiant);
+
+        request.setAttribute("etudiant", etudiant);
+        loadJSP(urlDetails, request, response);
+    }
+
+    private void showEditerEtudiant(HttpServletRequest request, HttpServletResponse response){
+        int idEtudiant = Integer.parseInt(request.getParameter("idEtudiant"));
+
+        Etudiant etudiant = EtudiantDAO.getEtudiantById(idEtudiant);
+        List<Groupe> groupes = GroupeDAO.getAll();
+
+        request.setAttribute("etudiant", etudiant);
+        request.setAttribute("groupes", groupes);
+
+        loadJSP(urlEditEtudiant, request, response);
     }
 
     private void submitEtudiantNotes(HttpServletRequest request, HttpServletResponse response){
