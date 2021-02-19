@@ -173,6 +173,9 @@ public class Controleur extends HttpServlet {
         if ("true".equals(request.getParameter("edit"))) {
             loadJSP(urlEditNotesEtudiant, request, response);
         } else {
+            String selectString = module.getSelectAllEtudiantsModule();
+            request.setAttribute("selectString", selectString);
+
             loadJSP(urlNotesEtudiant, request, response);
         }
     }

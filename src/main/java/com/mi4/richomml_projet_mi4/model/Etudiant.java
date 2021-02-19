@@ -3,6 +3,7 @@ package com.mi4.richomml_projet_mi4.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,6 +85,10 @@ public class Etudiant implements Serializable {
 
     }
 
+    public String getNomComplet() {
+        return this.getPrenom() + " " + this.getNom();
+    }
+
     public void addNote(Note note){
         notes.add(note);
     }
@@ -95,7 +100,6 @@ public class Etudiant implements Serializable {
     public void setNotes(List<Note> notes) {
         this.notes = notes;
     }
-
 
     @Override
     public String toString() {

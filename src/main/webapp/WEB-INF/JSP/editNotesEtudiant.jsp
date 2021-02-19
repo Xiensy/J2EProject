@@ -26,7 +26,7 @@
                 <tr>
                     <input type="hidden" name="notes" value="<%= note.getId() %>">
                     <td><%= note.getEtudiant().getPrenom() + " " + note.getEtudiant().getNom() %></td>
-                    <td><input type="number" name="noteValeurs" value="<%= note.getValeur() %>"></td>
+                    <td><input type="number" name="noteValeurs" value="<%= note.getValeur() %>" min="0" max="20"></td>
                 </tr>
             <% } %>
         </tbody>

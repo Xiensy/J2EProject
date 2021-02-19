@@ -78,6 +78,19 @@ public class Module implements Serializable {
         return etudiants;
     }
 
+    public String getSelectAllEtudiantsModule() {
+        List<Etudiant> allEtudiants = EtudiantDAO.getAll();
+
+        if (this.getAllEtudiant().size() > 0) {
+            allEtudiants.removeAll(this.getAllEtudiant());
+        }
+        String selectEtudiant = "";
+        for (Etudiant etudiant : allEtudiants) {
+            selectEtudiant += "<option value='" + etudiant.getId() + "'>" + etudiant.getNomComplet() + "</option>";
+        }
+        return selectEtudiant;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
