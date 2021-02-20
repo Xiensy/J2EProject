@@ -22,6 +22,10 @@
         <param-value>./CSS/style.css</param-value>
     </context-param>
     <context-param>
+        <param-name>editIcon</param-name>
+        <param-value>./IMAGES/edit_icon.png</param-value>
+    </context-param>
+    <context-param>
         <param-name>styleIncluder</param-name>
         <param-value>/WEB-INF/JSP/commun/styleincluder.jsp</param-value>
     </context-param>

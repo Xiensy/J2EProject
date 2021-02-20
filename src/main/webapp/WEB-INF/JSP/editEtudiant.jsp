@@ -15,24 +15,39 @@
 <form action="<%=application.getContextPath()%>/do/submitEditerEtudiant" method="post">
     <input id="idEtudiant" name="idEtudiant" type="hidden" value="<%= etudiant.getId() %>">
     <h1>Edition de l'étudiant : <jsp:getProperty name="etudiant" property="prenom"/> <jsp:getProperty name="etudiant" property="nom"/></h1>
-    <label for="prenomEtudiant">Prénom :</label>
-    <input id="prenomEtudiant" name="prenomEtudiant" type="text" value="<jsp:getProperty name="etudiant" property="prenom"/>">
-    <label for="nomEtudiant">Nom :</label>
-    <input id="nomEtudiant" name="nomEtudiant"  type="text" value="<jsp:getProperty name="etudiant" property="nom"/>">
-
-    <label for="groupeEtudiant">Groupe : </label>
-    <select id="groupeEtudiant" name="groupeEtudiant">
-        <% for (Groupe groupe : groupes) { %>
-            <option value="<%= groupe.getId() %>"><%= groupe.getNom() %></option>
-        <% } %>
-    </select>
-
-    <label for="nbAbsences">Nombre d'absences : </label><input id="nbAbsences" name="nbAbsences" type="number" min="0" value="<%= etudiant.getNbAbsences() %>">
-    <p>Notes : </p>
-    <% for (Note note : etudiant.getNotes()) { %>
-        <label for="<%= note.getId() %>"><%= note.getModule().getNom() %> : </label><input id="<%= note.getId() %>" name="notes" min="0" max="20" type="number" value="<%= note.getValeur() %>"/></br>
-    <% } %>
-    <input type="submit" value="Confirmer">
+    <div class="displayFlex">
+        <div>
+            <label for="prenomEtudiant">Prénom :</label>
+            <input id="prenomEtudiant" name="prenomEtudiant" type="text" value="<jsp:getProperty name="etudiant" property="prenom"/>">
+        </div>
+        <div>
+            <label for="nomEtudiant">Nom :</label>
+            <input id="nomEtudiant" name="nomEtudiant"  type="text" value="<jsp:getProperty name="etudiant" property="nom"/>">
+        </div>
+        <div>
+            <label for="groupeEtudiant">Groupe : </label>
+            <select id="groupeEtudiant" name="groupeEtudiant">
+                <% for (Groupe groupe : groupes) { %>
+                <% if (etudiant.getGroupe().getId().equals(groupe.getId())) {%>
+                <option value="<%= groupe.getId() %>" selected><%= groupe.getNom() %></option>
+                <% } else { %>
+                <option value="<%= groupe.getId() %>"><%= groupe.getNom() %></option>
+                <% }%>
+                <% } %>
+            </select>
+        </div>
+        <div>
+            <label for="nbAbsences">Nombre d'absences : </label>
+            <input id="nbAbsences" name="nbAbsences" type="number" min="0" value="<%= etudiant.getNbAbsences() %>">
+        </div>
+        <div>
+            <p>Notes : </p>
+            <% for (Note note : etudiant.getNotes()) { %>
+            <label for="<%= note.getId() %>"><%= note.getModule().getNom() %> : </label><input id="<%= note.getId() %>" name="notes" min="0" max="20" type="number" value="<%= note.getValeur() %>"/></br>
+            <% } %>
+        </div>
+        <input type="submit" value="Confirmer">
+    </div>
 </form>
 
 <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
