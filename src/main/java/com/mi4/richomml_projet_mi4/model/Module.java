@@ -114,6 +114,16 @@ public class Module implements Serializable {
         return selectEtudiant;
     }
 
+    public boolean isEnseignantModule(int idEnseignant) {
+        boolean isEnseignantModule = false;
+        int i = 0;
+        while (i < this.enseignants.size() && ! isEnseignantModule) {
+            isEnseignantModule = this.enseignants.get(i).getId() == idEnseignant;
+            i++;
+        }
+        return isEnseignantModule;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
