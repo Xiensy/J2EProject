@@ -80,6 +80,11 @@ public class Controleur extends HttpServlet {
 
             EtudiantDAO.update(etu1);
             ModuleDAO.update(MI1);
+
+            Enseignant ens1 = EnseignantDAO.create("Yoann", "Domingo", "yoann.domingo", "mdpyd");
+            ens1.addModule(MI4);
+            MI4.setEnseignant(ens1);
+
             ModuleDAO.update(MI4);
 
         }
