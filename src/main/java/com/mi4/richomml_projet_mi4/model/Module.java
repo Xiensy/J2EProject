@@ -71,22 +71,30 @@ public class Module implements Serializable {
     }
 
     public List<Etudiant> getAllEtudiant() {
-        ArrayList<Etudiant> etudiants = new ArrayList<>();
+        List<Etudiant> etudiants = new ArrayList<>();
         for (Note note : this.notes) {
             etudiants.add(note.getEtudiant());
         }
         return etudiants;
     }
 
-    public String getSelectAllEtudiantsModule() {
-        List<Etudiant> allEtudiants = EtudiantDAO.getAll();
-
-        if (this.getAllEtudiant().size() > 0) {
-            allEtudiants.removeAll(this.getAllEtudiant());
+    public List<Integer> getAllIdEtudiant() {
+        List<Integer> idEtudiants = new ArrayList<>();
+        for (Note note : this.notes) {
+            idEtudiants.add(note.getEtudiant().getId());
         }
+        return idEtudiants;
+    }
+
+    public String getSelectAllEtudiantsModule() {
+        List<Etudiant> allEtudiants = new ArrayList<>(EtudiantDAO.getAll());
+        List<Integer> etudiantsIdModule = this.getAllIdEtudiant();
+
         String selectEtudiant = "";
         for (Etudiant etudiant : allEtudiants) {
-            selectEtudiant += "<option value='" + etudiant.getId() + "'>" + etudiant.getNomComplet() + "</option>";
+            if (! etudiantsIdModule.contains(etudiant.getId())) {
+                selectEtudiant += "<option value='" + etudiant.getId() + "'>" + etudiant.getNomComplet() + "</option>";
+            }
         }
         return selectEtudiant;
     }
