@@ -12,11 +12,30 @@
 </head>
 <body>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
-    <h1>Etudiants</h1>
-    <ul>
+    <h1>Liste des étudiants : </h1>
+    <table>
+        <thead>
+        <tr><th>Nom Complet</th></tr>
+        </thead>
+        <tbody>
         <%for (Etudiant etu : etudiants){ %>
-            <li><a href="<%= application.getContextPath()%>/do/details?idEtudiant=<%= etu.getId() %>"><%= etu.getPrenom() + " " + etu.getNom() %></a></li>
+            <tr>
+                <td>
+                    <a href="<%= application.getContextPath()%>/do/details?idEtudiant=<%= etu.getId() %>">
+                        <%= etu.getPrenom() + " " + etu.getNom() %>
+                    </a>
+                </td>
+                <td>
+                    <a href="<%= application.getContextPath()%>/do/editerEtudiant?idEtudiant=<%= etu.getId() %>">
+                        <img src="<%= application.getContextPath() + "/IMAGES/edit_icon.png"%>" alt="editer">
+                    </a>
+                </td>
+            </tr>
         <% } %>
+        </tbody>
+    </table>
+    <ul>
+
     </ul>
     <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>

@@ -12,14 +12,35 @@
 </head>
 <body>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
-    <h1><jsp:getProperty name="etudiant" property="prenom"/> <jsp:getProperty name="etudiant" property="nom"/></h1>
-    <a href="<%= application.getContextPath()%>/do/editerEtudiant?idEtudiant=<%= etudiant.getId() %>">Editer</a>
-    <p>Groupe : <%= etudiant.getGroupe().getNom() %></p>
-    <p>Nombre d'absences : <%= etudiant.getNbAbsences() %></p>
-    <p>Notes : </p>
-    <% for (Note note : etudiant.getNotes()) { %>
-        <span><%= note.getModule().getNom() %> </span><span> <%= note.getValeur() %></span></br>
-    <% } %>
+    <h1>Informations de <jsp:getProperty name="etudiant" property="prenom"/> <jsp:getProperty name="etudiant" property="nom"/>
+        <a href="<%= application.getContextPath()%>/do/editerEtudiant?idEtudiant=<%= etudiant.getId() %>">
+            <img src="<%= application.getContextPath() + "/IMAGES/edit_icon.png"%>" alt="editer">
+        </a>
+    </h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <td><p>Groupe</p></td><td><p><%= etudiant.getGroupe().getNom() %></p></td>
+        </tr>
+        <tr>
+            <td><p>Nombre d'absences</p></td><td><p><%= etudiant.getNbAbsences() %></p></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Notes : </h3>
+    <table>
+        <thead>
+        <tr><th>Module</th><th>Valeur</th></tr>
+        </thead>
+        <tbody>
+        <% for (Note note : etudiant.getNotes()) { %>
+        <tr><td><%= note.getModule().getNom() %></td><td> <%= note.getValeur() %></td></tr>
+        <% } %>
+        </tbody>
+    </table>
+
     <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>
 </html>
