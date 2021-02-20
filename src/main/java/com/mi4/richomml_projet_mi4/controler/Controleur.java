@@ -90,15 +90,12 @@ public class Controleur extends HttpServlet {
             ens2.addModule(MI1);
 
             MI4.addEnseignants(ens1);
-            MI4.addEnseignants(admin);
 
             MI1.addEnseignants(ens2);
-            MI1.addEnseignants(admin);
 
             ModuleDAO.update(MI4);
             ModuleDAO.update(MI1);
 
-            EnseignantDAO.update(admin);
             EnseignantDAO.update(ens1);
             EnseignantDAO.update(ens2);
 
@@ -185,11 +182,10 @@ public class Controleur extends HttpServlet {
 
             Enseignant enseignant = EnseignantDAO.getEnseingantByIdentifiant(request.getParameter("identifiant"));
             if (enseignant != null && request.getParameter("mdp") != null && enseignant.getMdp().equals(request.getParameter("mdp"))) {
-                    request.getSession().setAttribute("connecter", true);
                     request.getSession().setAttribute("enseignant", enseignant);
             }
         } else if (request.getParameter("seDeconnecter") != null) {
-
+            request.getSession().removeAttribute("enseignant");
         }
 
         showSeConnecter(request, response);

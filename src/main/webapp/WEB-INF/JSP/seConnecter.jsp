@@ -43,6 +43,9 @@
 </div>
 <% } else { %>
 <h1><%= enseignant.getNomComplet() %></h1>
+<div>
+    <a href="<%= application.getContextPath()%>/do/submitSeConnecter?seDeconnecter=true">Se déconnecter</a>
+</div>
 <% }%>
 </body>
 </html>

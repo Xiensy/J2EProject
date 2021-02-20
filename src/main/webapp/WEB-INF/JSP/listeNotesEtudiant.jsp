@@ -4,6 +4,7 @@
 
 <jsp:useBean id="module" class="com.mi4.richomml_projet_mi4.model.Module" scope="request"/>
 <jsp:useBean id="selectString" class="java.lang.String" scope="request"/>
+<jsp:useBean id="enseignant" class="com.mi4.richomml_projet_mi4.model.Enseignant" scope="session"/>
 
 <!DOCTYPE html>
 <html>
@@ -14,6 +15,10 @@
 <body>
 <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
 <h1>Notes du module : <%= module.getNom() %></h1>
+<% if (enseignant.getId() == null || (enseignant.getId() != null && (enseignant.isAdmin() || module.getEnseignants().contains(enseignant)))) { %>
+<p>Uniquement les professeurs responsables du module peuvent modifier les notes</p>
+<p>Merci de vous <a href="<%= application.getContextPath()%>/do/seConnecter">connecter</a></p>
+<% } else if (module.getEnseignants().contains(enseignant)) { %>
 <div>
     <a href="<%= application.getContextPath()%>/do/listeNotesEtudiant?idModule=<%= module.getId() %>&edit=true">Modifier les notes</a>
     <a id="bntAddEtudiant" href="#addEtudiant">Ajouter un étudiant</a>
@@ -49,6 +54,7 @@
         </table>
     </form>
 </div>
+<% } %>
 <table>
     <thead>
         <tr>
@@ -79,7 +85,6 @@
 
     var bntAddEtudiant = document.getElementById("bntAddEtudiant")
     bntAddEtudiant.addEventListener('click', function() { functionBntAddEtudiant() });
-
 
 </script>
 </body>
