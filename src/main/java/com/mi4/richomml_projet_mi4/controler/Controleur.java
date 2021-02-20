@@ -21,7 +21,7 @@ public class Controleur extends HttpServlet {
     private String urlListeModuleNote;
     private String urlEditNotesEtudiant;
     private String urlEditEtudiant;
-
+    private String urlSeConnecter;
     public void init() {
         urlIndex = getInitParameter("urlIndex");
         urlListeEtudiants = getInitParameter("urlListeEtudiants");
@@ -33,6 +33,8 @@ public class Controleur extends HttpServlet {
         urlListeModuleNote = getInitParameter("urlListeModuleNote");
         urlEditNotesEtudiant = getInitParameter("urlEditNotesEtudiant");
         urlEditEtudiant = getInitParameter("urlEditEtudiant");
+        urlSeConnecter = getInitParameter("urlSeConnecter");
+
         GestionFactory.open();
 
         ///// INITIALISATION DE LA BD
@@ -79,13 +81,26 @@ public class Controleur extends HttpServlet {
             //GroupeDAO.update(SIMO);
 
             EtudiantDAO.update(etu1);
-            ModuleDAO.update(MI1);
 
-            Enseignant ens1 = EnseignantDAO.create("Yoann", "Domingo", "yoann.domingo", "mdpyd");
+            Enseignant admin = EnseignantDAO.create("admin", "admin", "admin.admin", "admin", true);
+            Enseignant ens1 = EnseignantDAO.create("Yoann", "Domingo", "yoann.domingo", "mdpyd", false);
+            Enseignant ens2 = EnseignantDAO.create("Lucas", "Richomme", "Lucas.richomme", "mdplr", false);
+
             ens1.addModule(MI4);
-            MI4.setEnseignant(ens1);
+            ens2.addModule(MI1);
+
+            MI4.addEnseignants(ens1);
+            MI4.addEnseignants(admin);
+
+            MI1.addEnseignants(ens2);
+            MI1.addEnseignants(admin);
 
             ModuleDAO.update(MI4);
+            ModuleDAO.update(MI1);
+
+            EnseignantDAO.update(admin);
+            EnseignantDAO.update(ens1);
+            EnseignantDAO.update(ens2);
 
         }
     }
@@ -117,13 +132,17 @@ public class Controleur extends HttpServlet {
             showListeGroupes(request, response);
         } else if (methode.equals("get") && action.equals("/listeModuleNote")) {
             showListeModuleNote(request, response);
+        } else if (methode.equals("get") && action.equals("/seConnecter")) {
+            showSeConnecter(request, response);
         } else if (action.equals("/submitNoteEtudiant")) {
             submitEtudiantNotes(request, response);
         } else if (action.equals("/editerEtudiant")){
             showEditerEtudiant(request, response);
         } else if (action.equals("/submitEditerEtudiant")){
             submitEditerEtudiant(request, response);
-        } else {
+        } else if (action.equals("/submitSeConnecter")){
+            submitSeConnecter(request, response);
+        }  else {
             loadJSP(urlIndex, request, response);
         }
 
@@ -155,6 +174,25 @@ public class Controleur extends HttpServlet {
         request.setAttribute("modules", modules);
 
         loadJSP(urlListeModuleNote, request, response);
+    }
+
+    private void showSeConnecter(HttpServletRequest request, HttpServletResponse response){
+
+        loadJSP(urlSeConnecter, request, response);
+    }
+    private void submitSeConnecter(HttpServletRequest request, HttpServletResponse response){
+        if (request.getParameter("seConnecter") != null) {
+
+            Enseignant enseignant = EnseignantDAO.getEnseingantByIdentifiant(request.getParameter("identifiant"));
+            if (enseignant != null && request.getParameter("mdp") != null && enseignant.getMdp().equals(request.getParameter("mdp"))) {
+                    request.getSession().setAttribute("connecter", true);
+                    request.getSession().setAttribute("enseignant", enseignant);
+            }
+        } else if (request.getParameter("seDeconnecter") != null) {
+
+        }
+
+        showSeConnecter(request, response);
     }
 
     private void showStudentDetails(HttpServletRequest request, HttpServletResponse response){
@@ -302,6 +340,7 @@ public class Controleur extends HttpServlet {
 
         showAbsences(request, response);
     }
+
 
     private void loadJSP(String jsp, HttpServletRequest req, HttpServletResponse res){
         try {

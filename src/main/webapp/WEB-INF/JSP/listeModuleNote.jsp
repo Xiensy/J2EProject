@@ -1,4 +1,5 @@
 <%@ page import="com.mi4.richomml_projet_mi4.model.Module" %>
+<%@ page import="com.mi4.richomml_projet_mi4.model.Enseignant" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <jsp:useBean id="modules" class="java.util.List<com.mi4.richomml_projet_mi4.model.Module>" scope="request"/>
@@ -18,6 +19,7 @@
             <th>Nom</th>
             <th>Nombre d'étudiant</th>
             <th>Moyenne</th>
+            <th>Enseignant resposable</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +28,13 @@
             <td><a href="<%= application.getContextPath()%>/do/listeNotesEtudiant?idModule=<%= module.getId() %>"><%= module.getNom() %></a></td>
             <td><%= module.getAllEtudiant().size() %></td>
             <td><%= module.getMoyenneNotes() %></td>
+            <td>
+                <ul>
+                <% for (Enseignant enseignant : module.getEnseignants()) { %>
+                    <li><%= enseignant.getNomComplet() %></li>
+                <% } %>
+                </ul>
+            </td>
         </tr>
     <% } %>
     </tbody>

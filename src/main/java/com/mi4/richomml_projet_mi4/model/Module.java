@@ -25,8 +25,8 @@ public class Module implements Serializable {
     @OneToMany
     private List<Note> notes;
 
-    @ManyToOne
-    private Enseignant enseignant;
+    @ManyToMany
+    private List<Enseignant> enseignants;
 
     public Integer getId() {
         return id;
@@ -61,12 +61,16 @@ public class Module implements Serializable {
         return notes;
     }
 
-    public Enseignant getEnseignant() {
-        return enseignant;
+    public List<Enseignant> getEnseignants() {
+        return enseignants;
     }
 
-    public void setEnseignant(Enseignant enseignant) {
-        this.enseignant = enseignant;
+    public void setEnseignants(List<Enseignant> enseignants) {
+        this.enseignants = enseignants;
+    }
+
+    public void addEnseignants(Enseignant enseignant) {
+        this.enseignants.add(enseignant);
     }
 
     public float getMoyenneNotes() {

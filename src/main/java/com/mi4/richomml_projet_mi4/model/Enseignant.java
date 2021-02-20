@@ -27,7 +27,10 @@ public class Enseignant implements Serializable {
     @Column(nullable = false)
     private String mdp;
 
-    @OneToMany
+    @Column(nullable = false)
+    private boolean admin;
+
+    @ManyToMany
     private List<Module> modules;
 
     private static final long serialVersionUID = 1L;
@@ -90,6 +93,14 @@ public class Enseignant implements Serializable {
 
     public void setMdp(String mdp) {
         this.mdp = mdp;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     @Override
