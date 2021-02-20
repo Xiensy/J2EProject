@@ -90,7 +90,6 @@ public class Controleur extends HttpServlet {
             ens2.addModule(MI1);
 
             MI4.addEnseignants(ens1);
-
             MI1.addEnseignants(ens2);
 
             ModuleDAO.update(MI4);

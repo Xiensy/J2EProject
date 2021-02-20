@@ -17,7 +17,7 @@
 <form action="<%=application.getContextPath()%>/do/submitEditerEtudiant" method="post">
     <input id="idEtudiant" name="idEtudiant" type="hidden" value="<%= etudiant.getId() %>">
     <h1>Edition de l'étudiant : <jsp:getProperty name="etudiant" property="prenom"/> <jsp:getProperty name="etudiant" property="nom"/></h1>
-    <table>
+    <table id="tableEditEtudiant" cellspacing="0">
         <tbody>
         <tr>
             <td><label for="prenomEtudiant">Prénom :</label></td>
@@ -27,10 +27,9 @@
             <td><label for="nomEtudiant">Nom :</label></td>
             <td><input id="nomEtudiant" name="nomEtudiant"  type="text" value="<jsp:getProperty name="etudiant" property="nom"/>"></td>
         </tr>
-        </tbody>
-        <div>
-            <label for="groupeEtudiant">Groupe : </label>
-            <select id="groupeEtudiant" name="groupeEtudiant">
+        <tr>
+            <td><label for="groupeEtudiant">Groupe : </label></td>
+            <td><select id="groupeEtudiant" name="groupeEtudiant">
                 <% for (Groupe groupe : groupes) { %>
                 <% if (etudiant.getGroupe().getId().equals(groupe.getId())) {%>
                 <option value="<%= groupe.getId() %>" selected><%= groupe.getNom() %></option>
@@ -38,14 +37,15 @@
                 <option value="<%= groupe.getId() %>"><%= groupe.getNom() %></option>
                 <% }%>
                 <% } %>
-            </select>
-        </div>
-        <div>
-            <label for="nbAbsences">Nombre d'absences : </label>
-            <input id="nbAbsences" name="nbAbsences" type="number" min="0" value="<%= etudiant.getNbAbsences() %>">
-        </div>
-        <input type="submit" value="Confirmer">
+            </select></td>
+        </tr>
+        <tr>
+            <td><label for="nbAbsences">Nombre d'absences : </label></td>
+            <td><input id="nbAbsences" name="nbAbsences" type="number" min="0" value="<%= etudiant.getNbAbsences() %>"></td>
+        </tr>
+        </tbody>
     </table>
+    <input type="submit" value="Confirmer">
 </form>
 
 <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>

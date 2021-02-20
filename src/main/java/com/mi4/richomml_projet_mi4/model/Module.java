@@ -117,8 +117,8 @@ public class Module implements Serializable {
     public boolean isEnseignantModule(int idEnseignant) {
         boolean isEnseignantModule = false;
         int i = 0;
-        while (i < this.enseignants.size() && ! isEnseignantModule) {
-            isEnseignantModule = this.enseignants.get(i).getId() == idEnseignant;
+        while (i < this.enseignants.size() && !isEnseignantModule) {
+            isEnseignantModule = this.enseignants.get(i).getId().equals(idEnseignant);
             i++;
         }
         return isEnseignantModule;
