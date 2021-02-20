@@ -16,7 +16,7 @@
 <h1>Se connecter</h1>
 <div>
     <form method="post" action="<%= application.getContextPath()%>/do/submitSeConnecter">
-        <table>
+        <table id="tableSeConnecter" cellspacing="0">
             <tr>
                 <td>
                     <label for="identifiant">Identifiant</label>
@@ -33,12 +33,8 @@
                     <input id="mdp" name="mdp" type="password" required>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <input type="submit" name="seConnecter" value="Se connecter">
-                </td>
-            </tr>
         </table>
+        <input type="submit" name="seConnecter" value="Se connecter">
     </form>
 </div>
 <% } else { %>
@@ -47,5 +43,6 @@
     <a href="<%= application.getContextPath()%>/do/submitSeConnecter?seDeconnecter=true">Se déconnecter</a>
 </div>
 <% }%>
+<jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>
 </html>

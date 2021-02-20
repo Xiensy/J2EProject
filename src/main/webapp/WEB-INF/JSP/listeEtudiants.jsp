@@ -3,6 +3,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <jsp:useBean id="etudiants" class="java.util.List<com.mi4.richomml_projet_mi4.model.Etudiant>" scope="request"/>
+<jsp:useBean id="enseignant" class="com.mi4.richomml_projet_mi4.model.Enseignant" scope="session"/>
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
 <body>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <h1>Liste des étudiants : </h1>
-    <table>
+    <table id="listeEtudiants" cellspacing="0">
         <thead>
         <tr><th>Nom Complet</th></tr>
         </thead>
@@ -25,11 +26,13 @@
                         <%= etu.getPrenom() + " " + etu.getNom() %>
                     </a>
                 </td>
+                <% if (enseignant.getId() != null) { %>
                 <td>
                     <a href="<%= application.getContextPath()%>/do/editerEtudiant?idEtudiant=<%= etu.getId() %>">
                         <img src="<%= application.getContextPath() + "/IMAGES/edit_icon.png"%>" alt="editer">
                     </a>
                 </td>
+                <% } %>
             </tr>
         <% } %>
         </tbody>

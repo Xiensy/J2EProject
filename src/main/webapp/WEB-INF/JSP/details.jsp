@@ -4,6 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="etudiant" class="com.mi4.richomml_projet_mi4.model.Etudiant" scope="request"/>
+<jsp:useBean id="enseignant" class="com.mi4.richomml_projet_mi4.model.Enseignant" scope="session"/>
 
 <html>
 <head>
@@ -13,12 +14,14 @@
 <body>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <h1>Informations de <jsp:getProperty name="etudiant" property="prenom"/> <jsp:getProperty name="etudiant" property="nom"/>
+        <% if (enseignant.getId() != null) { %>
         <a href="<%= application.getContextPath()%>/do/editerEtudiant?idEtudiant=<%= etudiant.getId() %>">
             <img src="<%= application.getContextPath() + "/IMAGES/edit_icon.png"%>" alt="editer">
         </a>
+        <% } %>
     </h1>
 
-    <table>
+    <table cellspacing="0">
         <tbody>
         <tr>
             <td><p>Groupe</p></td><td><p><%= etudiant.getGroupe().getNom() %></p></td>
@@ -30,7 +33,7 @@
     </table>
 
     <h3>Notes : </h3>
-    <table>
+    <table cellspacing="0">
         <thead>
         <tr><th>Module</th><th>Valeur</th></tr>
         </thead>

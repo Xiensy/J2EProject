@@ -228,14 +228,6 @@ public class Controleur extends HttpServlet {
         String prenom = request.getParameter("prenomEtudiant");
         String nom = request.getParameter("nomEtudiant");
         Groupe groupe = GroupeDAO.getGroupeById(Integer.parseInt(request.getParameter("groupeEtudiant")));
-        String[] valeurNotes = request.getParameterValues("notes");
-
-        int i = 0;
-        for (Note note : etudiant.getNotes()){
-            note.setValeur(Integer.parseInt(valeurNotes[i]));
-            NoteDAO.update(note);
-            i++;
-        }
 
         if (!"".equals(prenom)){
             etudiant.setPrenom(prenom);

@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="groupe" class="com.mi4.richomml_projet_mi4.model.Groupe" scope="request"/>
+<jsp:useBean id="enseignant" class="com.mi4.richomml_projet_mi4.model.Enseignant" scope="session"/>
 
 <html>
 <head>
@@ -18,7 +19,7 @@
 <body>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <h1>Liste des absences : <%= groupe.getNom() %></h1>
-    <table>
+    <table cellspacing="0">
         <thead>
         <tr>
             <td>Nom</td>
@@ -32,7 +33,15 @@
                         <a href="<%= application.getContextPath()%>/do/details?idEtudiant=<%= etu.getId() %>"><%= etu.getPrenom() + " " + etu.getNom() %></a>
                     </td>
                     <td>
-                        <p><a href="<%= application.getContextPath()%>/do/removeAbsences?idGroupe=<%= groupe.getId() %>&idEtudiant=<%= etu.getId() %>">-</a> <%= etu.getNbAbsences() %> <a href="<%= application.getContextPath()%>/do/addAbsences?idGroupe=<%= groupe.getId() %>&idEtudiant=<%= etu.getId() %>">+</a></p>
+                        <p>
+                            <% if (enseignant.getId() != null) { %>
+                            <a href="<%= application.getContextPath()%>/do/removeAbsences?idGroupe=<%= groupe.getId() %>&idEtudiant=<%= etu.getId() %>">-</a>
+                            <% } %>
+                            <%= etu.getNbAbsences() %>
+                            <% if (enseignant.getId() != null) { %>
+                            <a href="<%= application.getContextPath()%>/do/addAbsences?idGroupe=<%= groupe.getId() %>&idEtudiant=<%= etu.getId() %>">+</a>
+                            <% } %>
+                        </p>
                     </td>
                 </tr>
         <% } %>

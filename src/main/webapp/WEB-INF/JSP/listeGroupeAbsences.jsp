@@ -19,11 +19,11 @@
 <body>
     <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
     <h1>Liste des groupes</h1>
-    <table>
+    <table cellspacing="0">
         <thead>
         <tr>
             <td>Groupe</td>
-            <td>Nombres d'absences</td>
+            <td>Nombre d'absences</td>
         </tr>
         </thead>
         <tbody>
