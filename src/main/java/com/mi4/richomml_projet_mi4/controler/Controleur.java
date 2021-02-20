@@ -229,26 +229,38 @@ public class Controleur extends HttpServlet {
 
     private void submitEtudiantNotes(HttpServletRequest request, HttpServletResponse response){
 
-        System.out.println();
-        String[] idNotes = request.getParameterValues("notes");
-        String[] notesValues = request.getParameterValues("noteValeurs");
+        if (request.getParameter("edit") != null) {
+            String[] idNotes = request.getParameterValues("notes");
+            String[] notesValues = request.getParameterValues("noteValeurs");
 
-        for (int i = 0; i < idNotes.length; i++) {
-            Note note = NoteDAO.getNoteById(Integer.parseInt(idNotes[i]));
-            int noteValeur = Integer.parseInt(notesValues[i]);
-            if (noteValeur != note.getValeur()) {
-                note.setValeur(noteValeur);
-                NoteDAO.update(note);
+            for (int i = 0; i < idNotes.length; i++) {
+                Note note = NoteDAO.getNoteById(Integer.parseInt(idNotes[i]));
+                int noteValeur = Integer.parseInt(notesValues[i]);
+                if (noteValeur != note.getValeur()) {
+                    note.setValeur(noteValeur);
+                    NoteDAO.update(note);
+                }
+            }
+        } else if (request.getParameter("addEtudiant") != null) {
+            String idEtudiant = request.getParameter("idEtudiant");
+            System.out.println(idEtudiant);
+            if (idEtudiant != null && Integer.parseInt(idEtudiant) != -1) {
+
+                Module module = ModuleDAO.getModuleById(Integer.parseInt(request.getParameter("idModule")));
+                Etudiant etudiant = EtudiantDAO.getEtudiantById(Integer.parseInt(idEtudiant));
+                int noteValeur = Integer.parseInt(request.getParameter("note"));
+
+                Note note = NoteDAO.create(etudiant, module, noteValeur);
+
+                module.addNote(note);
+                etudiant.addNote(note);
+
+                ModuleDAO.update(module);
+                EtudiantDAO.update(etudiant);
             }
         }
 
-        int idModule = Integer.parseInt(request.getParameter("idModule"));
-
-        Module module = ModuleDAO.getModuleById(idModule);
-
-        request.setAttribute("module", module);
-
-        loadJSP(urlNotesEtudiant, request, response);
+        showEtudiantNotes(request, response);
     }
 
     private void showGroupeAbsences(HttpServletRequest request, HttpServletResponse response) {
