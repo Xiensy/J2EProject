@@ -3,6 +3,7 @@ package com.mi4.richomml_projet_mi4.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -101,6 +102,16 @@ public class Enseignant implements Serializable {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public static String getSelectAllEnseignant() {
+        List<Enseignant> allEnseignant = new ArrayList<>(EnseignantDAO.getAll());
+
+        String select = "";
+        for (Enseignant enseignant : allEnseignant) {
+            select += "<option value='" + enseignant.getId() + "'>" + enseignant.getNomComplet() + "</option>";
+        }
+        return select;
     }
 
     @Override

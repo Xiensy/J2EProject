@@ -114,6 +114,16 @@ public class Module implements Serializable {
         return selectEtudiant;
     }
 
+    public static String getSelectAllModule() {
+        List<Module> allModules = new ArrayList<>(ModuleDAO.getAll());
+
+        String select = "";
+        for (Module module : allModules) {
+            select += "<option value='" + module.getId() + "'>" + module.getNom() + "</option>";
+        }
+        return select;
+    }
+
     public boolean isEnseignantModule(int idEnseignant) {
         boolean isEnseignantModule = false;
         int i = 0;

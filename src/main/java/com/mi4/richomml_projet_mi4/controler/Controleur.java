@@ -138,7 +138,9 @@ public class Controleur extends HttpServlet {
             submitEditerEtudiant(request, response);
         } else if (action.equals("/submitSeConnecter")){
             submitSeConnecter(request, response);
-        }  else {
+        } else if (action.equals("/submitAdmin")){
+            submitAdmin(request, response);
+        } else {
             loadJSP(urlIndex, request, response);
         }
 
@@ -173,12 +175,19 @@ public class Controleur extends HttpServlet {
     }
 
     private void showSeConnecter(HttpServletRequest request, HttpServletResponse response){
+        String selectModule = Module.getSelectAllModule();
+        String selectEnseignant = Enseignant.getSelectAllEnseignant();
+        String selectGroupe = Groupe.getSelectAllGroupe();
+
+        request.setAttribute("selectModule", selectModule);
+        request.setAttribute("selectEnseignant", selectEnseignant);
+        request.setAttribute("selectGroupe", selectGroupe);
 
         loadJSP(urlSeConnecter, request, response);
     }
     private void submitSeConnecter(HttpServletRequest request, HttpServletResponse response){
-        if (request.getParameter("seConnecter") != null) {
 
+        if (request.getParameter("seConnecter") != null) {
             Enseignant enseignant = EnseignantDAO.getEnseingantByIdentifiant(request.getParameter("identifiant"));
             if (enseignant != null && request.getParameter("mdp") != null && enseignant.getMdp().equals(request.getParameter("mdp"))) {
                     request.getSession().setAttribute("enseignant", enseignant);
@@ -255,6 +264,61 @@ public class Controleur extends HttpServlet {
         request.setAttribute("groupes", groupes);
 
         loadJSP(urlEditEtudiant, request, response);
+    }
+
+    private void submitAdmin(HttpServletRequest request, HttpServletResponse response){
+        if (request.getParameter("createEtudiant") != null) {
+            String nomEtudiant = request.getParameter("nomEtudiant");
+            String prenomEtudiant = request.getParameter("prenomEtudiant");
+            String groupeEtudiantStr = request.getParameter("groupeEtudiant");
+            Groupe groupeEtudiant = GroupeDAO.getGroupeById(Integer.parseInt(groupeEtudiantStr));
+
+            Etudiant newEtu = EtudiantDAO.create(nomEtudiant, prenomEtudiant, groupeEtudiant);
+
+            groupeEtudiant.addEtudiant(newEtu);
+            GroupeDAO.update(groupeEtudiant);
+
+        } else if (request.getParameter("createEnseignant") != null) {
+            String nomEnseignant = request.getParameter("nomEnseignant");
+            String prenomEnseignant = request.getParameter("prenomEnseignant");
+            String identifiantEnseignant = request.getParameter("identifiantEnseignant");
+            String adminEnseignant = request.getParameter("adminEnseignant");
+            String mdpEnseignant = request.getParameter("mdpEnseignant");
+
+            if (EnseignantDAO.getEnseingantByIdentifiant(identifiantEnseignant) == null) {
+                EnseignantDAO.create(nomEnseignant, prenomEnseignant, identifiantEnseignant, mdpEnseignant, "on".equals(adminEnseignant));
+            }
+
+        } else if (request.getParameter("addEnseigantToModule") != null) {
+            String idModule = request.getParameter("idModule");
+            String idEnseignantModule = request.getParameter("idEnseignantModule");
+
+            Module module = ModuleDAO.getModuleById(Integer.parseInt(idModule));
+            Enseignant enseignant = EnseignantDAO.getEnseingantById(Integer.parseInt(idEnseignantModule));
+
+
+            if (! module.isEnseignantModule(enseignant.getId())) {
+
+                module.addEnseignants(enseignant);
+                ModuleDAO.update(module);
+            }
+
+
+
+        } else if (request.getParameter("addModule") != null) {
+            String nomModule = request.getParameter("nomModule");
+            String idEnseignantNewModule = request.getParameter("idEnseignantNewModule");
+
+            Module module = ModuleDAO.create(nomModule);
+            Enseignant enseignant = EnseignantDAO.getEnseingantById(Integer.parseInt(idEnseignantNewModule));
+
+            module.addEnseignants(enseignant);
+            enseignant.addModule(module);
+
+            ModuleDAO.update(module);
+        }
+
+        showSeConnecter(request, response);
     }
 
     private void submitEtudiantNotes(HttpServletRequest request, HttpServletResponse response){

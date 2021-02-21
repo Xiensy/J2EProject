@@ -3,6 +3,7 @@ package com.mi4.richomml_projet_mi4.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,6 +68,20 @@ public class Groupe implements Serializable {
 			module.addGroupe(this);
 		}
 	}*/
+
+    public void addEtudiant(Etudiant etudiant) {
+        this.etudiants.add(etudiant);
+    }
+
+    public static String getSelectAllGroupe() {
+        List<Groupe> allGroupes = new ArrayList<>(GroupeDAO.getAll());
+
+        String select = "";
+        for (Groupe groupe : allGroupes) {
+            select += "<option value='" + groupe.getId() + "'>" + groupe.getNom() + "</option>";
+        }
+        return select;
+    }
 
     @Override
     public boolean equals(Object o) {
