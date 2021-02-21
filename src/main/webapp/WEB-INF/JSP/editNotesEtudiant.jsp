@@ -30,15 +30,9 @@
                 </tr>
             <% } %>
         </tbody>
-        <tfoot>
-        <tr>
-            <td>
-                <input type="submit" name="edit" value="Enregistrer">
-                <input type="hidden" name="idModule" value="<%= module.getId() %>"/>
-            </td>
-        </tr>
-        </tfoot>
     </table>
+    <input type="submit" name="edit" value="Enregistrer">
+    <input type="hidden" name="idModule" value="<%= module.getId() %>"/>
 </form>
 <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>

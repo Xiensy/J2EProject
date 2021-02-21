@@ -30,19 +30,23 @@
 </div>
 <% } %>
 <div>
-    <div class="">
-        <a id="btnAddEtudiant" class="btn" href="#formAddEtudiant">Ajout d'un etudiant</a>
-        <a id="btnAddEnseignant" class="btn" href="#formAddEnseignant">Ajout d'un enseignant</a>
-        <a id="btnAddEnseignantToModule" class="btn" href="#formAddEnseignantToModule">Ajout d'un enseigant responsable</a>
-        <a id="btnAddModule" class="btn" href="#formAddModule">Ajout d'un module</a>
-        <a id="btnAddGroupe" class="btn" href="#formAddGroupe">Ajout d'un groupe</a>
-    </div>
+    <nav id="navAdmin">
+        <ul>
+            <li><a id="btnAddEtudiant" class="btn" href="#formAddEtudiant">Ajout d'un étudiant</a></li>
+            <li><a id="btnAddEnseignant" class="btn" href="#formAddEnseignant">Ajout d'un enseignant</a></li>
+            <li><a id="btnAddEnseignantToModule" class="btn" href="#formAddEnseignantToModule">Assigner un module à un enseignant</a></li>
+            <li><a id="btnAddModule" class="btn" href="#formAddModule">Ajout d'un module</a></li>
+            <li><a id="btnAddGroupe" class="btn" href="#formAddGroupe">Ajout d'un groupe</a></li>
+        </ul>
+    </nav>
+
     <div>
-        <form id="formAddEtudiant"class="displayNone" action="<%= application.getContextPath()%>/do/submitAdmin" method="post">
-            <table>
+        <form id="formAddEtudiant" class="displayNone" action="<%= application.getContextPath()%>/do/submitAdmin" method="post">
+            <h2>Ajouter un étudiant</h2>
+            <table class="noBorderTable" cellspacing="0">
                 <tr>
                     <td>
-                        <label for="nomEtudiant">Nom</label>
+                        <label for="nomEtudiant">Nom :</label>
                     </td>
                     <td>
                         <input type="text" id="nomEtudiant" name="nomEtudiant" required>
@@ -50,7 +54,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="prenomEtudiant">Prénom</label>
+                        <label for="prenomEtudiant">Prénom :</label>
                     </td>
                     <td>
                         <input type="text" id="prenomEtudiant" name="prenomEtudiant" required>
@@ -58,7 +62,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="groupeEtudiant">Groupe</label>
+                        <label for="groupeEtudiant">Groupe :</label>
                     </td>
                     <td>
                         <select id="groupeEtudiant" name="groupeEtudiant">
@@ -66,16 +70,13 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <input type="submit" name="createEtudiant" value="Crée l'étudiant">
-                    </td>
-                </tr>
             </table>
+            <input type="submit" name="createEtudiant" value="Confirmer">
         </form>
 
         <form id="formAddEnseignant" class="displayNone" action="<%= application.getContextPath()%>/do/submitAdmin" method="post">
-            <table>
+            <h2>Ajouter un enseignant</h2>
+            <table class="noBorderTable" cellspacing="0">
                 <tr>
                     <td>
                         <label for="nomEnseignant">Nom :</label>
@@ -116,19 +117,16 @@
                         <input type="password" id="mdpEnseignant" name="mdpEnseignant" required>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <input type="submit" name="createEnseignant" value="Crée l'enseignant">
-                    </td>
-                </tr>
             </table>
+            <input type="submit" name="createEnseignant" value="Confirmer">
         </form>
 
         <form id="formAddEnseignantToModule" class="displayNone" action="<%= application.getContextPath()%>/do/submitAdmin" method="post">
-            <table>
+            <h2>Assigner un module à un enseignant</h2>
+            <table class="noBorderTable" cellspacing="0">
                 <tr>
                     <td>
-                        <label for="idModule">Module</label>
+                        <label for="idModule">Module :</label>
                     </td>
                     <td>
                         <select id="idModule" name="idModule">
@@ -138,7 +136,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="idEnseignantModule">Enseignant</label>
+                        <label for="idEnseignantModule">Enseignant :</label>
                     </td>
                     <td>
                         <select id="idEnseignantModule" name="idEnseignantModule">
@@ -146,19 +144,16 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <input type="submit" name="addEnseigantToModule" value="Ajout d'un enseigant responsable">
-                    </td>
-                </tr>
             </table>
+            <input type="submit" name="addEnseignantToModule" value="Confirmer">
         </form>
 
         <form id="formAddModule" class="displayNone" action="<%= application.getContextPath()%>/do/submitAdmin" method="post">
-            <table>
+            <h2>Ajout d'un module</h2>
+            <table class="noBorderTable" cellspacing="0">
                 <tr>
                     <td>
-                        <label for="nomModule">Nom</label>
+                        <label for="nomModule">Nom :</label>
                     </td>
                     <td>
                         <input type="text" id="nomModule" name="nomModule" required>
@@ -166,7 +161,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="idEnseignantNewModule">Enseignant respondable</label>
+                        <label for="idEnseignantNewModule">Enseignant responsable :</label>
                     </td>
                     <td>
                         <select id="idEnseignantNewModule" name="idEnseignantNewModule">
@@ -174,30 +169,23 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <input type="submit" name="addModule" value="Ajout du module">
-                    </td>
-                </tr>
             </table>
+            <input type="submit" name="addModule" value="Confirmer">
         </form>
 
         <form id="formAddGroupe" class="displayNone" action="<%= application.getContextPath()%>/do/submitAdmin" method="post">
-            <table>
+            <h2>Ajout d'un groupe</h2>
+            <table class="noBorderTable" cellspacing="0">
                 <tr>
                     <td>
-                        <label for="nomGroupe">Nom</label>
+                        <label for="nomGroupe">Nom : </label>
                     </td>
                     <td>
                         <input type="text" id="nomGroupe" name="nomGroupe" required>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <input type="submit" name="addGroupe" value="Ajout d'un groupe">
-                    </td>
-                </tr>
             </table>
+            <input type="submit" name="addGroupe" value="Confirmer">
         </form>
     </div>
 </div>

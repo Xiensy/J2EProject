@@ -38,7 +38,6 @@
         </tr>
     <% } %>
     </tbody>
-
 </table>
 <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>

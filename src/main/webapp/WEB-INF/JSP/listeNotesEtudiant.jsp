@@ -17,9 +17,8 @@
 <h1>Notes du module : <%= module.getNom() %></h1>
 <% if (enseignant.getId() != null && (enseignant.isAdmin() || module.isEnseignantModule(enseignant.getId()))) { %>
 <div class="textAlignCenter">
-    <a href="<%= application.getContextPath()%>/do/listeNotesEtudiant?idModule=<%= module.getId() %>&edit=true">Modifier les notes</a>
-    <span> | </span>
-    <a id="bntAddEtudiant" href="#addEtudiant">Ajouter un étudiant</a>
+    <a class="btn" href="<%= application.getContextPath()%>/do/listeNotesEtudiant?idModule=<%= module.getId() %>&edit=true">Modifier les notes</a>
+    <a class="btn" id="bntAddEtudiant" href="#addEtudiant">Ajouter un étudiant</a>
 </div>
 <div id="addEtudiant" class="displayNone">
     <form method="post" action="<%= application.getContextPath()%>/do/submitNoteEtudiant">
@@ -43,13 +42,9 @@
                     <input id="note" name="note" type="number" value="0" min="0" max="20">
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <input type="hidden" name="idModule" value="<%= module.getId() %>">
-                    <input type="submit" name="addEtudiant" value="Ajouter l'étudiant">
-                </td>
-            </tr>
         </table>
+        <input type="hidden" name="idModule" value="<%= module.getId() %>">
+        <input type="submit" name="addEtudiant" value="Ajouter l'étudiant">
     </form>
 </div>
 <% } else { %>
@@ -58,7 +53,7 @@
     <p>Merci de vous <a href="<%= application.getContextPath()%>/do/seConnecter">connecter</a></p>
 </div>
 <% } %>
-<table cellspacing="0">
+<table id="tableListeNotes" cellspacing="0">
     <thead>
         <tr>
             <th>Nom étudiant</th>
@@ -76,18 +71,19 @@
 </table>
 <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 <script type="text/javascript">
-
-    function functionBntAddEtudiant() {
-        var divAddEtudiant = document.getElementById('addEtudiant');
+    function functionBtnAddEtudiant() {
+        const divAddEtudiant = document.getElementById('addEtudiant');
         if (! divAddEtudiant.classList.contains('displayNone')) {
-            divAddEtudiant.classList.add('displayNone') }
-        else {
-            divAddEtudiant.classList.remove('displayNone')
+            divAddEtudiant.classList.add('displayNone');
+            divAddEtudiant.classList.remove('displayBlock');
+        } else {
+            divAddEtudiant.classList.remove('displayNone');
+            divAddEtudiant.classList.add('displayBlock');
         }
     }
 
-    var bntAddEtudiant = document.getElementById("bntAddEtudiant")
-    bntAddEtudiant.addEventListener('click', function() { functionBntAddEtudiant() });
+    const btnAddEtudiant = document.getElementById("bntAddEtudiant");
+    btnAddEtudiant.addEventListener('click', function() { functionBtnAddEtudiant() });
 
 </script>
 </body>

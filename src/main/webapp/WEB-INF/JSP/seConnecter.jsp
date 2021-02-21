@@ -16,7 +16,7 @@
 <h1>Se connecter</h1>
 <div>
     <form method="post" action="<%= application.getContextPath()%>/do/submitSeConnecter">
-        <table id="tableSeConnecter" cellspacing="0">
+        <table class="noBorderTable" cellspacing="0">
             <tr>
                 <td>
                     <label for="identifiant">Identifiant</label>

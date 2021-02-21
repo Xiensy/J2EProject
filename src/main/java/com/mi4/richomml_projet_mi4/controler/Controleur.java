@@ -306,7 +306,7 @@ public class Controleur extends HttpServlet {
                 error += "<li>Erreur : Un enseignant avec l'identifiant " + identifiantEnseignant + " existe déjà</li>";
             }
 
-        } else if (request.getParameter("addEnseigantToModule") != null) {
+        } else if (request.getParameter("addEnseignantToModule") != null) {
             String idModule = request.getParameter("idModule");
             String idEnseignantModule = request.getParameter("idEnseignantModule");
 
