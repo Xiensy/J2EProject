@@ -12,14 +12,14 @@
 </head>
 <body>
 <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
-<h1>Module</h1>
-<table>
+<h1>Liste des modules</h1>
+<table id="tableModuleNote" cellspacing="0">
     <thead>
         <tr>
             <th>Nom</th>
-            <th>Nombre d'étudiant</th>
-            <th>Moyenne</th>
-            <th>Enseignant resposable</th>
+            <th>Nombre d'étudiants</th>
+            <th>Moyenne Générale</th>
+            <th>Enseignants responsables</th>
         </tr>
     </thead>
     <tbody>

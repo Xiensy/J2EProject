@@ -16,13 +16,14 @@
 <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
 <h1>Notes du module : <%= module.getNom() %></h1>
 <% if (enseignant.getId() != null && (enseignant.isAdmin() || module.isEnseignantModule(enseignant.getId()))) { %>
-<div>
+<div class="textAlignCenter">
     <a href="<%= application.getContextPath()%>/do/listeNotesEtudiant?idModule=<%= module.getId() %>&edit=true">Modifier les notes</a>
+    <span> | </span>
     <a id="bntAddEtudiant" href="#addEtudiant">Ajouter un étudiant</a>
 </div>
 <div id="addEtudiant" class="displayNone">
     <form method="post" action="<%= application.getContextPath()%>/do/submitNoteEtudiant">
-        <table>
+        <table cellspacing="0">
             <tr>
                 <td>
                     <label for="idEtudiant">Etudiant</label>
@@ -52,10 +53,12 @@
     </form>
 </div>
 <% } else { %>
-<p>Uniquement les professeurs responsables du module peuvent modifier les notes</p>
-<p>Merci de vous <a href="<%= application.getContextPath()%>/do/seConnecter">connecter</a></p>
+<div class="textAlignCenter">
+    <p>Uniquement les professeurs responsables du module peuvent modifier les notes</p>
+    <p>Merci de vous <a href="<%= application.getContextPath()%>/do/seConnecter">connecter</a></p>
+</div>
 <% } %>
-<table>
+<table cellspacing="0">
     <thead>
         <tr>
             <th>Nom étudiant</th>

@@ -1,6 +1,6 @@
 body{
     font-family: sans-serif;
-    margin: 0;
+    margin: 0 0 75px 0;
     position: relative;
 }
 
@@ -125,4 +125,27 @@ input[type="submit"]{
     display: block;
     margin: auto;
     margin-top: 20px;
+}
+
+td ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+th{
+    padding: 0 15px;
+}
+
+#tableModuleNote td:last-of-type{
+    text-align: left;
+}
+
+.textAlignCenter{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+td input[type="submit"]{
+    margin-top: 0;
 }

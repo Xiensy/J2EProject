@@ -14,7 +14,7 @@
 <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
 <h1>Notes du module : <%= module.getNom() %></h1>
 <form method="post" action="<%= application.getContextPath()%>/do/submitNoteEtudiant">
-    <table>
+    <table cellspacing="0">
         <thead>
             <tr>
                 <th>Nom étudiant</th>
@@ -32,8 +32,10 @@
         </tbody>
         <tfoot>
         <tr>
-            <input type="hidden" name="idModule" value="<%= module.getId() %>"/>
-            <td><input type="submit" name="edit" value="Enregistrer"></td>
+            <td>
+                <input type="submit" name="edit" value="Enregistrer">
+                <input type="hidden" name="idModule" value="<%= module.getId() %>"/>
+            </td>
         </tr>
         </tfoot>
     </table>
