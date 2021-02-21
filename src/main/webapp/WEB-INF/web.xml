@@ -77,6 +77,10 @@
             <param-name>urlSeConnecter</param-name>
             <param-value>/WEB-INF/JSP/seConnecter.jsp</param-value>
         </init-param>
+        <init-param>
+            <param-name>urlVueAdmin</param-name>
+            <param-value>/WEB-INF/JSP/vueAdmin.jsp</param-value>
+        </init-param>
     </servlet>
     
     <servlet-mapping>

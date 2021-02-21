@@ -13,6 +13,9 @@
                     Se connecter
                 <% } %>
             </a></li>
+            <% if (enseignant.getId() != null && enseignant.isAdmin()) { %>
+            <li><a href="<%= application.getContextPath()%>/do/vueAdmin">Vue admin</a></li>
+            <% } %>
         </ul>
     </nav>
 </header>

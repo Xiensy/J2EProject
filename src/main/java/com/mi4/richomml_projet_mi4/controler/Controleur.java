@@ -22,6 +22,8 @@ public class Controleur extends HttpServlet {
     private String urlEditNotesEtudiant;
     private String urlEditEtudiant;
     private String urlSeConnecter;
+    private String urlVueAdmin;
+
     public void init() {
         urlIndex = getInitParameter("urlIndex");
         urlListeEtudiants = getInitParameter("urlListeEtudiants");
@@ -34,6 +36,7 @@ public class Controleur extends HttpServlet {
         urlEditNotesEtudiant = getInitParameter("urlEditNotesEtudiant");
         urlEditEtudiant = getInitParameter("urlEditEtudiant");
         urlSeConnecter = getInitParameter("urlSeConnecter");
+        urlVueAdmin = getInitParameter("urlVueAdmin");
 
         GestionFactory.open();
 
@@ -130,6 +133,8 @@ public class Controleur extends HttpServlet {
             showListeModuleNote(request, response);
         } else if (methode.equals("get") && action.equals("/seConnecter")) {
             showSeConnecter(request, response);
+        } else if (methode.equals("get") && action.equals("/vueAdmin")) {
+            showVueAdmin(request, response);
         } else if (action.equals("/submitNoteEtudiant")) {
             submitEtudiantNotes(request, response);
         } else if (action.equals("/editerEtudiant")){
@@ -175,13 +180,6 @@ public class Controleur extends HttpServlet {
     }
 
     private void showSeConnecter(HttpServletRequest request, HttpServletResponse response){
-        String selectModule = Module.getSelectAllModule();
-        String selectEnseignant = Enseignant.getSelectAllEnseignant();
-        String selectGroupe = Groupe.getSelectAllGroupe();
-
-        request.setAttribute("selectModule", selectModule);
-        request.setAttribute("selectEnseignant", selectEnseignant);
-        request.setAttribute("selectGroupe", selectGroupe);
 
         loadJSP(urlSeConnecter, request, response);
     }
@@ -266,7 +264,22 @@ public class Controleur extends HttpServlet {
         loadJSP(urlEditEtudiant, request, response);
     }
 
+    private void showVueAdmin(HttpServletRequest request, HttpServletResponse response){
+
+        String selectModule = Module.getSelectAllModule();
+        String selectEnseignant = Enseignant.getSelectAllEnseignant();
+        String selectGroupe = Groupe.getSelectAllGroupe();
+
+        request.setAttribute("selectModule", selectModule);
+        request.setAttribute("selectEnseignant", selectEnseignant);
+        request.setAttribute("selectGroupe", selectGroupe);
+
+        loadJSP(urlVueAdmin, request, response);
+    }
+
     private void submitAdmin(HttpServletRequest request, HttpServletResponse response){
+        String error = "";
+        String success = "";
         if (request.getParameter("createEtudiant") != null) {
             String nomEtudiant = request.getParameter("nomEtudiant");
             String prenomEtudiant = request.getParameter("prenomEtudiant");
@@ -277,6 +290,7 @@ public class Controleur extends HttpServlet {
 
             groupeEtudiant.addEtudiant(newEtu);
             GroupeDAO.update(groupeEtudiant);
+            success += "<li>Succés : Etudiant " + nomEtudiant + " crée</li>";
 
         } else if (request.getParameter("createEnseignant") != null) {
             String nomEnseignant = request.getParameter("nomEnseignant");
@@ -287,6 +301,9 @@ public class Controleur extends HttpServlet {
 
             if (EnseignantDAO.getEnseingantByIdentifiant(identifiantEnseignant) == null) {
                 EnseignantDAO.create(nomEnseignant, prenomEnseignant, identifiantEnseignant, mdpEnseignant, "on".equals(adminEnseignant));
+                success += "<li>Succés : Enseignant " + nomEnseignant + " crée</li>";
+            } else {
+                error += "<li>Erreur : Un enseignant avec l'identifiant " + identifiantEnseignant + " existe déjà</li>";
             }
 
         } else if (request.getParameter("addEnseigantToModule") != null) {
@@ -298,9 +315,11 @@ public class Controleur extends HttpServlet {
 
 
             if (! module.isEnseignantModule(enseignant.getId())) {
-
                 module.addEnseignants(enseignant);
                 ModuleDAO.update(module);
+                success += "<li>Succés : Enseignant " + enseignant.getNomComplet() + " à était ajouter au module " + module.getNom() + "</li>";
+            } else {
+                    error += "<li>Erreur : L'enseignant appartient déjà à ce module</li>";
             }
 
 
@@ -315,10 +334,22 @@ public class Controleur extends HttpServlet {
             module.addEnseignants(enseignant);
             enseignant.addModule(module);
 
+            success += "<li>Succés : Le module " + module.getNom() + " crée</li>";
+
             ModuleDAO.update(module);
+        } else if (request.getParameter("addGroupe") != null) {
+            String nomGroupe = request.getParameter("nomGroupe");
+
+            GroupeDAO.create(nomGroupe);
+
+            success += "<li>Succés : Le groupe " + nomGroupe + " crée</li>";
+
         }
 
-        showSeConnecter(request, response);
+        request.setAttribute("error", error);
+        request.setAttribute("success", success);
+
+        showVueAdmin(request, response);
     }
 
     private void submitEtudiantNotes(HttpServletRequest request, HttpServletResponse response){
