@@ -35,11 +35,11 @@
                     <td>
                         <p>
                             <% if (enseignant.getId() != null) { %>
-                            <a href="<%= application.getContextPath()%>/do/removeAbsences?idGroupe=<%= groupe.getId() %>&idEtudiant=<%= etu.getId() %>">-</a>
+                            <a class="lilBtn" href="<%= application.getContextPath()%>/do/removeAbsences?idGroupe=<%= groupe.getId() %>&idEtudiant=<%= etu.getId() %>">-</a>
                             <% } %>
                             <%= etu.getNbAbsences() %>
                             <% if (enseignant.getId() != null) { %>
-                            <a href="<%= application.getContextPath()%>/do/addAbsences?idGroupe=<%= groupe.getId() %>&idEtudiant=<%= etu.getId() %>">+</a>
+                            <a class="lilBtn" href="<%= application.getContextPath()%>/do/addAbsences?idGroupe=<%= groupe.getId() %>&idEtudiant=<%= etu.getId() %>">+</a>
                             <% } %>
                         </p>
                     </td>

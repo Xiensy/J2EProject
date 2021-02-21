@@ -8,7 +8,7 @@
             <li><a href="<%= application.getContextPath()%>/do/groupeAbsences">Consulter les absences</a></li>
             <li><a href="<%= application.getContextPath()%>/do/seConnecter">
                 <% if (enseignant.getId() != null) { %>
-                    Se déconnecter
+                    Mon Compte
                 <% } else { %>
                     Se connecter
                 <% } %>

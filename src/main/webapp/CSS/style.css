@@ -107,7 +107,45 @@ td{
     margin: auto;
 }
 
+.btnCenter{
+    display: block;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
 .btn:hover{
+    background-color: #EEEEEE;
+    text-decoration: none;
+}
+
+.lilBtn{
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+}
+
+.success{
+    background-color: #88FF88;
+    color: green;
+    border: green 1px solid;
+    border-radius: 15px;
+    width: 50%;
+    margin: auto;
+}
+
+.error{
+    background-color: #FF8888;
+    color: #660000;
+    border: #660000 1px solid;
+    border-radius: 15px;
+    width: 50%;
+    margin: auto;
+}
+
+.lilBtn:hover{
     background-color: #EEEEEE;
     text-decoration: none;
 }

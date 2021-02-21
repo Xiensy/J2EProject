@@ -14,7 +14,7 @@
 <jsp:include page="<%= application.getInitParameter("entetedepage")%>"/>
 <h1>Vue Admin</h1>
 <% if (error != null && ! "".equals(error)){ %>
-<div>
+<div class="error">
     <h2>Erreur :</h2>
     <ul>
         <%= error %>
@@ -22,8 +22,8 @@
 </div>
 <% } %>
 <% if (success != null && ! "".equals(success)) { %>
-<div>
-    <h2>success :</h2>
+<div class="success">
+    <h2>Action réussie :</h2>
     <ul>
         <%= success %>
     </ul>

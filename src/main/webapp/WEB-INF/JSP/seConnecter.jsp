@@ -39,9 +39,7 @@
 </div>
 <% } else { %>
     <h1><%= enseignant.getNomComplet() %></h1>
-    <div>
-        <a href="<%= application.getContextPath()%>/do/submitSeConnecter?seDeconnecter=true">Se déconnecter</a>
-    </div>
+    <a class="btn btnCenter" href="<%= application.getContextPath()%>/do/submitSeConnecter?seDeconnecter=true">Se déconnecter</a>
 <% } %>
 <jsp:include page="<%= application.getInitParameter("pieddepage")%>"/>
 </body>

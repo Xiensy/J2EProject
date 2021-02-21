@@ -290,7 +290,7 @@ public class Controleur extends HttpServlet {
 
             groupeEtudiant.addEtudiant(newEtu);
             GroupeDAO.update(groupeEtudiant);
-            success += "<li>Succés : Etudiant " + nomEtudiant + " crée</li>";
+            success += "<li>Succès : Etudiant " + nomEtudiant + " créé</li>";
 
         } else if (request.getParameter("createEnseignant") != null) {
             String nomEnseignant = request.getParameter("nomEnseignant");
@@ -301,7 +301,7 @@ public class Controleur extends HttpServlet {
 
             if (EnseignantDAO.getEnseingantByIdentifiant(identifiantEnseignant) == null) {
                 EnseignantDAO.create(nomEnseignant, prenomEnseignant, identifiantEnseignant, mdpEnseignant, "on".equals(adminEnseignant));
-                success += "<li>Succés : Enseignant " + nomEnseignant + " crée</li>";
+                success += "<li>Succès : Enseignant " + nomEnseignant + " créé</li>";
             } else {
                 error += "<li>Erreur : Un enseignant avec l'identifiant " + identifiantEnseignant + " existe déjà</li>";
             }
@@ -317,9 +317,9 @@ public class Controleur extends HttpServlet {
             if (! module.isEnseignantModule(enseignant.getId())) {
                 module.addEnseignants(enseignant);
                 ModuleDAO.update(module);
-                success += "<li>Succés : Enseignant " + enseignant.getNomComplet() + " à était ajouter au module " + module.getNom() + "</li>";
+                success += "<li>Succès : Enseignant " + enseignant.getNomComplet() + " a été ajouté au module " + module.getNom() + "</li>";
             } else {
-                    error += "<li>Erreur : L'enseignant appartient déjà à ce module</li>";
+                error += "<li>Erreur : L'enseignant appartient déjà à ce module</li>";
             }
 
 
@@ -334,7 +334,7 @@ public class Controleur extends HttpServlet {
             module.addEnseignants(enseignant);
             enseignant.addModule(module);
 
-            success += "<li>Succés : Le module " + module.getNom() + " crée</li>";
+            success += "<li>Succès : Module " + module.getNom() + " créé</li>";
 
             ModuleDAO.update(module);
         } else if (request.getParameter("addGroupe") != null) {
@@ -342,7 +342,7 @@ public class Controleur extends HttpServlet {
 
             GroupeDAO.create(nomGroupe);
 
-            success += "<li>Succés : Le groupe " + nomGroupe + " crée</li>";
+            success += "<li>Succès : Groupe " + nomGroupe + " créé</li>";
 
         }
 
